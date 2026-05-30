@@ -78,8 +78,8 @@
   .project-card.wide { grid-column: span 5; }
   .project-card.tall { grid-column: span 7; }
   .project-card.third { grid-column: span 4; }
-  .project-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #111111; position: relative; display: flex; align-items: center; justify-content: center; }
-  .project-card.third .project-image { aspect-ratio: 4/3; }
+  .project-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #111111; position: relative; display: flex; align-items: center; justify-content: center; max-height: 520px; }
+  .project-card.third .project-image { aspect-ratio: 4/3; max-height: 400px; }
   .project-image img {
     width: 100%;
     height: 100%;
@@ -849,8 +849,8 @@
     </div>
 
     <!-- FILA 1: Eléctrico + Sanitario -->
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card large">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen15.png">
         <div class="project-overlay">
           <span class="overlay-tag">Revit · MEP · Instalación Eléctrica</span>
@@ -867,8 +867,8 @@
       </div>
     </div>
 
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card medium">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen16.png">
         <div class="project-overlay">
           <p data-lang="es">Proyecto sanitario 3D en Revit: redes de agua fría, caliente y alcantarillado con detalle de baño completo. Coordinación IFC con arquitectura y estructura.</p>
@@ -885,8 +885,8 @@
     </div>
 
     <!-- FILA 2: Mobiliario + Plano Técnico -->
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card wide">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen17.png">
         <div class="project-overlay">
           <p data-lang="es">Mobiliario a medida modelado en Revit: cocina modular, closets y muebles de baño. Cada pieza con especificaciones directas para fabricación en taller.</p>
@@ -902,8 +902,8 @@
       </div>
     </div>
 
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card tall">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen18.png">
         <div class="project-overlay">
           <p data-lang="es">Plano técnico M-02 — Mueble Cocina Frontal E:1/8. Especificaciones de muebles aéreos, base y cubierta: materiales, dimensiones y herrajes. Del modelo Revit directo al taller.</p>
@@ -956,7 +956,7 @@
 
     <!-- FILA 2: Planta (4) + Cadwork MEP (8) -->
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen20.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Planta · DS19 · 210 unidades</span>
@@ -991,8 +991,8 @@
       </div>
     </div>
 
-        <div class="project-card tall">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+        <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen21.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · IFC · MEP · CNC</span>
@@ -1010,8 +1010,8 @@
     </div>
 
     <!-- Sanitario 3D Jardines -->
-    <div class="project-card" style="grid-column: span 12;">
-      <div class="project-image" style="aspect-ratio: 21/9;">
+    <div class="project-card full">
+      <div class="project-image" style="aspect-ratio:21/9;">
         <img src="imagen22.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · IFC · Coordinación Sanitaria · 210 unidades</span>
@@ -1029,8 +1029,8 @@
     </div>
 
     <!-- FILA 3: Módulos 3D (4) + Plano (4) + Montaje (4) -->
-    <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+    <div class="project-card large">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen23.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · CAD/CAM · Smart Panel</span>
@@ -1047,7 +1047,7 @@
       </div>
     </div>
 
-    <div class="project-card third">
+    <div class="project-card medium">
       <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen23_2.jpg" alt="Render interior Puelo Original living comedor escalera madera">
         <div class="project-overlay">
@@ -1065,8 +1065,8 @@
       </div>
     </div>
 
-    <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+    <div class="project-card medium">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen24.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Plano de Montaje · TBS</span>
@@ -1083,8 +1083,8 @@
       </div>
     </div>
 
-    <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+    <div class="project-card large">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen25.png">
         <div class="project-overlay">
           <span class="overlay-tag">Foto Real · Montaje · Prefabricado</span>
@@ -1138,7 +1138,7 @@
 
     <!-- FILA 2: Planta (4) + Módulos 3D (4) + Explosión (4) -->
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen28.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Planta · DS49/DS10 · 2D+1B / 3D+1B</span>
@@ -1156,7 +1156,7 @@
     </div>
 
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen29.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Revit · IFC · Smart Panel</span>
@@ -1174,7 +1174,7 @@
     </div>
 
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen30.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Vista Explosionada · CNC</span>
@@ -1192,8 +1192,8 @@
     </div>
 
     <!-- FILA 3: Interior (6) + Estructura MEP (6) -->
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card tall">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen31.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Interior · Coordinación MEP</span>
@@ -1210,8 +1210,8 @@
       </div>
     </div>
 
-    <div class="project-card half">
-      <div class="project-image" style="aspect-ratio: 16/10;">
+    <div class="project-card wide">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen32.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · BIM Collab · IFC</span>
@@ -1265,7 +1265,7 @@
 
     <!-- FILA 2: Planta (4) + Módulos 3D (4) + Explosión (4) -->
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen35.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Planta · DS49 / DS10 · 50,8 m²</span>
@@ -1283,7 +1283,7 @@
     </div>
 
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen36.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Smart Panel · CAD/CAM · +800 unidades</span>
@@ -1301,7 +1301,7 @@
     </div>
 
     <div class="project-card third">
-      <div class="project-image" style="aspect-ratio: 4/3;">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen37.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Vista Explosionada · Prefabricación</span>
@@ -1319,8 +1319,8 @@
     </div>
 
     <!-- FILA 3: Estructura MEP full width -->
-    <div class="project-card" style="grid-column: span 12;">
-      <div class="project-image" style="aspect-ratio: 21/9;">
+    <div class="project-card full">
+      <div class="project-image" style="aspect-ratio:21/9;">
         <img src="imagen38.png">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Revit · IFC · BIM Collab</span>
@@ -1430,7 +1430,7 @@
 
 <!-- Fachada paneles + Estructura metálica — fila grande -->
     <div class="project-card large">
-      <div class="project-image">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen44.jpg">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Tabiquería Madera · Módulos Apilados · 210 deptos</span>
@@ -1449,7 +1449,7 @@
 
     <!-- Estructura metálica pasarelas -->
     <div class="project-card medium">
-      <div class="project-image">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen45.jpg">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · Acero + Madera · Sistema Mixto</span>
@@ -1468,7 +1468,7 @@
 
     <!-- Vista pasarela interior perspectiva -->
     <div class="project-card medium">
-      <div class="project-image">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen46.jpg">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · BIM · Coordinación MEP</span>
@@ -1487,7 +1487,7 @@
 
     <!-- Vista planta baja MEP + Estructura completa -->
     <div class="project-card wide">
-      <div class="project-image">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen47.jpg">
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · IFC · MEP · BIM Collab</span>
@@ -1504,7 +1504,7 @@
       </div>
     </div>
     <div class="project-card third">
-      <div class="project-image">
+      <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen48.png" alt="Modelo 3D sanitario redes incendio Edificio Now previo coordinación MEP">
         <div class="project-overlay">
           <span class="overlay-tag">MEP · Sanitario + Incendio · Pre-Coordinación</span>
@@ -1522,8 +1522,8 @@
     </div>
 
     <!-- Estructura madera completa del edificio - FULL WIDTH -->
-    <div class="project-card" style="grid-column: span 12;">
-      <div class="project-image" style="aspect-ratio: 21/9;">
+    <div class="project-card wide">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen49.png" >
         <div class="project-overlay">
           <span class="overlay-tag">Cadwork · CNC · Prefabricación a Escala · 210 deptos</span>
@@ -1592,8 +1592,8 @@
     </div>
 
     <!-- imagen51: proceso terminaciones exteriores -->
-    <div class="project-card large">
-      <div class="project-image">
+    <div class="project-card medium">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen51.jpg" alt="Refugio Oriente proceso terminaciones exteriores trabajadores fachada">
         <div class="project-overlay">
           <span class="overlay-tag">Foto Real · Terminaciones Exteriores · En Proceso</span>
@@ -1629,7 +1629,7 @@
       </div>
     </div>
 
-    <div class="project-card medium">
+    <div class="project-card large">
       <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen54.png" alt="Planta Refugio Oriente 3 dormitorios 2 baños 71m2 primer y segundo piso">
         <div class="project-overlay">
@@ -1648,7 +1648,7 @@
     </div>
 
     <!-- Modelo 3D EIFS + Entramado + Interior MDP -->
-    <div class="project-card third">
+    <div class="project-card medium">
       <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen53.png" alt="Modelo 3D Cadwork Refugio Oriente EIFS blanco antracita siding fibrocemento PVC café">
         <div class="project-overlay">
@@ -1684,7 +1684,7 @@
       </div>
     </div>
 
-    <div class="project-card third">
+    <div class="project-card tall">
       <div class="project-image" style="aspect-ratio:4/3;">
         <img src="imagen56.png" alt="Cadwork Refugio Oriente interior MDP 12mm cielo piso Topnotch 18mm entramado listo OSB Volcanita EIFS">
         <div class="project-overlay">
@@ -1703,8 +1703,8 @@
     </div>
 
     <!-- Foto interior terminado - full width -->
-    <div class="project-card full">
-      <div class="project-image" style="aspect-ratio:21/9;">
+    <div class="project-card wide">
+      <div class="project-image" style="aspect-ratio:16/10;">
         <img src="imagen57.jpg" alt="Foto real interior Refugio Oriente terminado living blanco minimalista escalera negra madera">
         <div class="project-overlay">
           <span class="overlay-tag">Foto Real · Interior Terminado · Listo para Entrega</span>
