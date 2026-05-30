@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rodrigo Oliva Suazo | BIM Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --panel: #161616;
+    --border: #2a2a2a;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --white: #f0ece4;
+    --muted: #7a7570;
+    --text: #cdc8be;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .lang-toggle { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); cursor: pointer; border: 1px solid var(--border); padding: 0.35rem 0.8rem; transition: all 0.3s; background: none; }
+  .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1.2fr; position: relative; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 4rem 6rem; position: relative; z-index: 2; }
+  .hero-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .hero-tag::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); }
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.0; color: var(--white); margin-bottom: 0.5rem; }
+  .hero-name em { font-style: italic; color: var(--gold-light); }
+  .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
+  .hero-desc { font-size: 0.9rem; line-height: 1.8; color: var(--text); max-width: 420px; margin-bottom: 3rem; border-left: 2px solid var(--gold); padding-left: 1.5rem; }
+  .hero-stats { display: flex; gap: 3rem; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right img { width: 100%; height: 100%; object-fit: contain; object-position: center center; opacity: 1.0; background: #0a0a0a; }
+  .hero-image-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, var(--black) 0%, transparent 35%); }
+
+  section { padding: 7rem 3rem; }
+  .section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
+  .section-num { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: var(--border); line-height: 1; user-select: none; }
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--white); line-height: 1.1; }
+
+  .about { background: var(--dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { font-size: 0.95rem; line-height: 1.9; color: var(--text); margin-bottom: 1.5rem; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-item { background: var(--panel); padding: 1.2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .skill-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+  .skill-level { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gold); font-weight: 500; }
+
+  .projects { background: var(--black); }
+  .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+  .project-card { position: relative; overflow: hidden; cursor: pointer; background: var(--panel); border: 1px solid var(--border); }
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-card:hover .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    transition: transform 0.7s ease;
+    display: block;
+    background: #111111;
+  }
+  .project-card.large { grid-column: span 7; }
+  .project-card.medium { grid-column: span 5; }
+  .project-card.wide { grid-column: span 5; }
+  .project-card.tall { grid-column: span 7; }
+  .project-card.third { grid-column: span 4; }
+  .project-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #111111; position: relative; display: flex; align-items: center; justify-content: center; }
+  .project-card.third .project-image { aspect-ratio: 4/3; }
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    transition: transform 0.7s ease;
+    display: block;
+    background: #111111;
+  }
+  .project-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.88); opacity: 0; transition: opacity 0.4s; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+  .project-overlay p { font-size: 0.85rem; line-height: 1.7; color: var(--text); }
+  .project-info { padding: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+  .project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--white); margin-bottom: 0.3rem; }
+  .project-meta { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .project-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-dim); padding: 0.2rem 0.6rem; white-space: nowrap; }
+
+  /* Wezig feature block */
+  .wezig-block { grid-column: span 12; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 0; }
+  .wezig-main { grid-column: 1; display: flex; flex-direction: column; gap: 1.5rem; }
+  .wezig-side { grid-column: 2; display: flex; flex-direction: column; gap: 1.5rem; }
+  .wezig-label { grid-column: span 12; }
+  .project-label-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .project-label-bar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--white); font-weight: 300; }
+  .project-label-bar-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+  .experience { background: var(--dark); }
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr auto; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); align-items: start; transition: all 0.3s; }
+  .exp-item:hover { background: var(--gold-dim); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; }
+  .exp-period { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--muted); padding-top: 0.3rem; }
+  .exp-company { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 0.3rem; }
+  .exp-role { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .exp-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); max-width: 600px; }
+  .exp-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-dim); padding: 0.25rem 0.7rem; white-space: nowrap; align-self: flex-start; }
+
+  .education { background: var(--black); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .edu-item { background: var(--panel); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
+  .edu-item:hover { background: #1a1a1a; }
+  .edu-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); transform: scaleY(0); transition: transform 0.4s; transform-origin: top; }
+  .edu-item:hover::before { transform: scaleY(1); }
+  .edu-year { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: 1.5rem; }
+  .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
+  .edu-institution { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+
+  .contact { background: var(--dark); text-align: center; padding: 8rem 3rem; position: relative; overflow: hidden; }
+  .contact::before { content: 'BIM'; position: absolute; font-family: 'Cormorant Garamond', serif; font-size: 25vw; font-weight: 300; color: rgba(255,255,255,0.02); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; white-space: nowrap; }
+  .contact-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+  .contact-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 3rem; }
+  .contact-heading em { font-style: italic; color: var(--gold-light); }
+  .contact-links { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .contact-link { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; }
+  .contact-link-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .contact-link-value { font-size: 0.9rem; color: var(--white); transition: color 0.3s; }
+  .contact-link:hover .contact-link-value { color: var(--gold); }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+  .footer-role { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .gold-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.5s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.6s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.7s; }
+
+  [data-lang="en"] { display: none; }
+  body.english [data-lang="es"] { display: none; }
+  body.english [data-lang="en"] { display: block; }
+  span[data-lang="en"] { display: none; }
+  body.english span[data-lang="es"] { display: none; }
+  body.english span[data-lang="en"] { display: inline; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vh; }
+    .hero-left { padding: 7rem 2rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .wezig-block { grid-template-columns: 1fr; }
+    .wezig-main, .wezig-side { grid-column: 1; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.large,.project-card.medium,.project-card.wide,.project-card.tall,.project-card.third { grid-column: span 1; }
+    .exp-item { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    section { padding: 5rem 1.5rem; }
+    .contact { padding: 5rem 1.5rem; }
+  }
+
+  /* ── V8 DESIGN SYSTEM UPGRADES ── */
+
+  /* Uniform project section label */
+  .proj-label {
+    grid-column: span 12;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.2rem;
+    margin-top: 2.5rem;
+  }
+  .proj-label-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .proj-label-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--white);
+  }
+  .proj-label-desc {
+    margin-top: 0.8rem; font-size: 0.85rem; color: var(--muted);
+    max-width: 800px; line-height: 1.7;
+  }
+
+  /* Uniform hero card */
+  .card-hero {
+    grid-column: span 12;
+    border: 2px solid var(--gold);
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .card-hero-bar {
+    background: var(--gold);
+    padding: 0.4rem 1.5rem;
+    display: flex; align-items: center;
+  }
+  .card-hero-bar-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--black); font-weight: 600;
+  }
+  .card-hero .project-info { border-top: 1px solid var(--gold); }
+  .card-hero-name { color: var(--gold-light) !important; }
+
+  /* Half column */
+  .project-card.half { grid-column: span 6; }
+  /* Full column */
+  .project-card.full-span { grid-column: span 12; }
+
+  /* Overlay tag pill */
+  .overlay-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold-dim);
+    padding: 0.15rem 0.55rem; margin-bottom: 0.3rem;
+    display: inline-block;
+  }
+  .project-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,10,10,0.92);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 1.8rem; text-align: center; gap: 0.5rem;
+  }
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-overlay p { font-size: 0.83rem; line-height: 1.7; color: var(--text); }
+
+  /* Hover overlay for img-cell (Sol de Quillón triple) */
+  .img-cell { position: relative; overflow: hidden; cursor: pointer; }
+  .img-cell:hover .project-overlay { opacity: 1; }
+
+  /* Render stack (Edificio Modular renders) */
+  .render-stack {
+    display: flex; flex-direction: column; gap: 1rem;
+    padding: 1rem; background: #111111;
+  }
+  .render-stack img { width: 100%; display: block; object-fit: contain; background: #111111; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Rodrigo Oliva Suazo</div>
+  <ul class="nav-links">
+    <li><a href="#about"><span data-lang="es">Perfil</span><span data-lang="en">Profile</span></a></li>
+    <li><a href="#projects"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></a></li>
+    <li><a href="#experience"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></a></li>
+    <li><a href="#education"><span data-lang="es">Formación</span><span data-lang="en">Education</span></a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <button class="lang-toggle" onclick="document.body.classList.toggle('english'); this.textContent = document.body.classList.contains('english') ? 'ES' : 'EN'">EN</button>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span data-lang="es">Ingeniero Constructor · MBIM</span>
+      <span data-lang="en">Construction Engineer · MBIM</span>
+    </div>
+    <h1 class="hero-name">Rodrigo<br><em>Oliva</em> Suazo</h1>
+    <p class="hero-title">
+      <span data-lang="es">Modelador &amp; Coordinador BIM</span>
+      <span data-lang="en">BIM Modeler &amp; Coordinator</span>
+    </p>
+    <p class="hero-desc">
+      <span data-lang="es">Del modelo digital a la obra construida. Especialista BIM con Máster Internacional que ha transformado decenas de proyectos — desde viviendas sociales hasta edificios en altura — integrando Cadwork, Revit y ArchiCAD con coordinación MEP de precisión quirúrgica.</span>
+      <span data-lang="en">From digital model to built reality. International BIM Master specialist who has transformed dozens of projects — from social housing to high-rise buildings — integrating Cadwork, Revit and ArchiCAD with surgical-precision MEP coordination.</span>
+    </p>
+    <div class="hero-stats">
+      <div><div class="stat-num">10+</div><div class="stat-label"><span data-lang="es">Años exp.</span><span data-lang="en">Years exp.</span></div></div>
+      <div><div class="stat-num">MBIM</div><div class="stat-label"><span data-lang="es">Máster BIM</span><span data-lang="en">BIM Master's</span></div></div>
+      <div><div class="stat-num">MEP</div><div class="stat-label"><span data-lang="es">Coordinación</span><span data-lang="en">Coordination</span></div></div>
+      <div><div class="stat-num">7+</div><div class="stat-label"><span data-lang="es">Proyectos reales</span><span data-lang="en">Real projects</span></div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="imagen1.png" />
+    <div class="hero-image-overlay"></div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<section class="about" id="about">
+
+  <!-- ── NEW ABOUT: Photo left + Bio right ── -->
+  <style>
+    .about-photo-block {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+    .about-photo-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .about-photo-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .about-photo-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--gold);
+      z-index: 2;
+    }
+    .about-photo-frame img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(15%);
+      transition: filter 0.4s;
+    }
+    .about-photo-frame:hover img {
+      filter: grayscale(0%);
+    }
+    .about-photo-caption {
+      text-align: center;
+      padding: 1rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    .about-photo-caption .name-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .about-photo-caption .name-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .about-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 0.2rem 0.6rem;
+      background: var(--panel);
+    }
+    .about-bio-col h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .about-bio-col h3 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .about-bio-col p {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .about-bio-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+    }
+    .about-pillar {
+      background: var(--panel);
+      padding: 1rem 1.2rem;
+      transition: background 0.3s;
+    }
+    .about-pillar:hover {
+      background: #1a1a1a;
+    }
+    .about-pillar-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .about-pillar-text {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    @media (max-width: 900px) {
+      .about-photo-block { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-col { max-width: 300px; margin: 0 auto; }
+      .about-pillars { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div class="section-title-block">
+      <div class="section-label"><span data-lang="es">Sobre mí</span><span data-lang="en">About me</span></div>
+      <h2 class="section-title"><span data-lang="es">Perfil Profesional</span><span data-lang="en">Professional Profile</span></h2>
+    </div>
+  </div>
+
+  <div class="about-photo-block">
+
+    <!-- FOTO + CAPTION -->
+    <div class="about-photo-col">
+      <div>
+        <div class="about-photo-frame">
+          <img src="imagen00.png" alt="Rodrigo Oliva Suazo — Ingeniero Constructor · MBIM">
+        </div>
+        <div class="about-photo-caption">
+          <div class="name-main">Rodrigo Oliva Suazo</div>
+          <div class="name-sub">Ing. Constructor · MBIM · BIM Coordinator</div>
+        </div>
+      </div>
+      <div class="about-badges">
+        <span class="about-badge">Cadwork ADV</span>
+        <span class="about-badge">Revit ADV</span>
+        <span class="about-badge">IFC · MEP</span>
+        <span class="about-badge">BIM Collab</span>
+        <span class="about-badge">Armada de Chile</span>
+        <span class="about-badge">+7 años exp.</span>
+        <span class="about-badge">Barcelona MBIM</span>
+        <span class="about-badge">Disponible</span>
+      </div>
+    </div>
+
+    <!-- BIO -->
+    <div class="about-bio-col">
+
+      <h3 data-lang="es">Del modelo digital<br>a la <em>obra que se mantiene en pie.</em></h3>
+      <h3 data-lang="en">From digital model<br>to <em>the work that stands.</em></h3>
+
+      <p data-lang="es">Ingeniero Constructor y Magíster Internacional en BIM Management con más de 7 años en el rubro. Mi trayectoria combina gestión de obra, Oficina Técnica y coordinación BIM en proyectos habitacionales, construcción modular industrializada y edificación en altura — siempre con un enfoque claro: que el modelo sirva a la obra, no al revés.</p>
+      <p data-lang="en">Construction Engineer and International Master in BIM Management with over 7 years in the industry. My career combines site management, Technical Office, and BIM coordination across residential, industrialized modular construction, and high-rise building projects — with one constant focus: making the model serve the build, not the other way around.</p>
+
+      <p data-lang="es">He trabajado con Cadwork, Revit, ArchiCAD, BIM Collab y AutoCAD en proyectos reales que hoy están construidos y habitados. Modelado pieza a pieza, detección de interferencias, coordinación MEP, cubicaciones y gestión de subcontratos no son solo procesos en mi CV — son parte del día a día que he ejecutado en terreno y en pantalla.</p>
+      <p data-lang="en">I've worked with Cadwork, Revit, ArchiCAD, BIM Collab, and AutoCAD on real projects that are today built and occupied. Piece-by-piece modeling, clash detection, MEP coordination, quantity takeoffs, and subcontract management aren't just items on my CV — they're part of the daily work I've executed both on-site and on-screen.</p>
+
+      <div class="about-bio-divider"></div>
+
+      <p data-lang="es">Antes del BIM, serví en la Armada de Chile. Esa etapa me formó de una manera que ningún software ni metodología puede replicar: disciplina, responsabilidad bajo presión, capacidad de adaptación y claridad en el cumplimiento de objetivos. Llegué a la construcción con esa base — y nunca la he abandonado.</p>
+      <p data-lang="en">Before BIM, I served in the Chilean Navy. That chapter shaped me in ways no software or methodology can replicate: discipline, responsibility under pressure, adaptability, and clarity in meeting objectives. I came into construction with that foundation — and I've never left it behind.</p>
+
+      <div class="about-pillars">
+        <div class="about-pillar">
+          <div class="about-pillar-title"><span data-lang="es">Visión integral</span><span data-lang="en">Full-picture vision</span></div>
+          <div class="about-pillar-text" data-lang="es">Del presupuesto al detalle constructivo. Entiendo la obra desde la gestión financiera hasta el modelo 3D — y lo que ocurre entre ambos.</div>
+          <div class="about-pillar-text" data-lang="en">From budget to construction detail. I understand the project from financial management to the 3D model — and everything that happens in between.</div>
+        </div>
+        <div class="about-pillar">
+          <div class="about-pillar-title"><span data-lang="es">Coordinación multidisciplinar</span><span data-lang="en">Multidisciplinary coordination</span></div>
+          <div class="about-pillar-text" data-lang="es">Arquitectura, estructura y MEP en un único modelo coordinado. Cero interferencias antes de fabricar es el estándar mínimo.</div>
+          <div class="about-pillar-text" data-lang="en">Architecture, structure and MEP in a single coordinated model. Zero clashes before fabrication is the minimum standard.</div>
+        </div>
+        <div class="about-pillar">
+          <div class="about-pillar-title"><span data-lang="es">Disciplina de terreno</span><span data-lang="en">Site-level discipline</span></div>
+          <div class="about-pillar-text" data-lang="es">Formado en la Armada, curtido en obra. La responsabilidad frente al equipo y el cumplimiento de plazos no son negociables.</div>
+          <div class="about-pillar-text" data-lang="en">Trained in the Navy, hardened on-site. Accountability to the team and deadline delivery are non-negotiable.</div>
+        </div>
+        <div class="about-pillar">
+          <div class="about-pillar-title"><span data-lang="es">Mejora continua</span><span data-lang="en">Continuous improvement</span></div>
+          <div class="about-pillar-text" data-lang="es">El mejor proceso de hoy es el punto de partida de mañana. Busco activamente cómo hacer más con menos, mejor y más rápido.</div>
+          <div class="about-pillar-text" data-lang="en">Today's best process is tomorrow's starting point. I actively look for ways to do more with less, better and faster.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SKILLS GRID (kept below) -->
+  <div class="about-grid" style="margin-top:0;">
+    <div class="about-text" style="display:none;"></div>
+    <div style="grid-column:1/-1;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">
+        <span data-lang="es">Stack tecnológico</span><span data-lang="en">Technology stack</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item"><span class="skill-name">Cadwork 3D</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">Autodesk Revit</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">ArchiCAD</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">BIM Collab</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">BIM Sync</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">AutoCAD</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">MS Project</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+        <div class="skill-item"><span class="skill-name">Sketchup</span><span class="skill-level" style="color:#7a7570;font-weight:500;">●●○ MED</span></div>
+        <div class="skill-item"><span class="skill-name">Dynamo</span><span class="skill-level" style="color:#3a3530;font-weight:400;">●○○ BAS</span></div>
+        <div class="skill-item"><span class="skill-name">Rhino</span><span class="skill-level" style="color:#3a3530;font-weight:400;">●○○ BAS</span></div>
+        <div class="skill-item"><span class="skill-name">Presto</span><span class="skill-level" style="color:#7a7570;font-weight:500;">●●○ MED</span></div>
+        <div class="skill-item"><span class="skill-name">IFC / MEP</span><span class="skill-level" style="color:#c9a84c;font-weight:600;">●●● ADV</span></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="gold-line"></div>
+
+<section class="projects" id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div class="section-title-block">
+      <div class="section-label"><span data-lang="es">Portafolio · 7 proyectos · 3 países de formación</span><span data-lang="en">Portfolio · 7 projects · 3 training countries</span></div>
+      <h2 class="section-title"><span data-lang="es">Del Modelo a la Realidad</span><span data-lang="en">From Model to Reality</span></h2>
+    </div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- WEZIG LABEL -->
+    <div class="proj-label" style="margin-top:0;">
+      <div class="proj-label-sub">
+        <span data-lang="es">Trabajo Final de Máster · MBIM Barcelona · Ciclo BIM Completo 3D→4D→5D</span>
+        <span data-lang="en">Master's Final Project · MBIM Barcelona · Full BIM Cycle 3D→4D→5D</span>
+      </div>
+      <div class="proj-label-title">Edificio Wezig — <em style="font-style:italic;color:var(--gold-light);">MBIM Barcelona · Zigurat</em></div>
+    </div>
+
+    <!-- Render 1 - Large -->
+    <div class="project-card large">
+      <div class="project-image">
+        <img src="imagen1.png" alt="Render exterior frontal Edificio Wezig 9 plantas LOD 350 Enscape" />
+        <div class="project-overlay">
+          <span class="overlay-tag">Enscape · LOD 350 · TFM Barcelona</span>
+          <p data-lang="es">Render fotorrealista generado en Enscape. Vista frontal del edificio de oficinas de 9 plantas con fachada acristalada, modelado bajo estándar LOD 350 como Trabajo Final del Máster Internacional en BIM Management en Barcelona.</p>
+          <p data-lang="en">Photorealistic render generated in Enscape. Front view of the 9-story office building with glass facade, modeled to LOD 350 as the final project of the International Master's in BIM Management in Barcelona.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">render Exterior · Vista Frontal</span><span data-lang="en">exterior Render · Front View</span></div>
+          <div class="project-meta">Enscape · Revit · 2020–2021</div>
+        </div>
+        <span class="project-tag">Render</span>
+      </div>
+    </div>
+
+    <!-- Render 2 - Medium -->
+    <div class="project-card medium">
+      <div class="project-image">
+        <img src="imagen2.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Enscape · Vista Aérea · Contexto Urbano</span>
+          <p data-lang="es">Vista aérea del render Enscape mostrando el conjunto urbano completo: accesos peatonales, vegetación y entorno inmediato del edificio. Generada para presentación del TFM ante el tribunal evaluador del MBIM en Barcelona.</p>
+          <p data-lang="en">Aerial Enscape render showing the full urban context: pedestrian access, landscaping and surroundings. Generated for the Master's final project presentation before the MBIM evaluation panel in Barcelona.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">render Exterior · Vista Aérea</span><span data-lang="en">exterior Render · Aerial View</span></div>
+          <div class="project-meta">Enscape · Revit · 2020–2021</div>
+        </div>
+        <span class="project-tag">Enscape</span>
+      </div>
+    </div>
+
+    <!-- Revit Model - Wide -->
+    <div class="project-card wide">
+      <div class="project-image">
+        <img src="imagen3.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Revit · BIM Multidisciplinar · Scrum</span>
+          <p data-lang="es">Vista isométrica del modelo BIM completo en Revit: arquitectura, estructura y contexto urbano integrados. Coordinación multidisciplinar bajo metodología Scrum con sprints asignados por rol BIM — el flujo colaborativo fue parte central del TFM.</p>
+          <p data-lang="en">Isometric view of the complete Revit BIM model: architecture, structure and urban context integrated. Multidisciplinary coordination using Scrum methodology with BIM role-based sprints — the collaborative workflow was a core component of the thesis.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">modelo Bim · Vista Isométrica</span><span data-lang="en">bim Model · Isometric View</span></div>
+          <div class="project-meta">Revit · ArchiCAD · BIM Sync · 2020–2021</div>
+        </div>
+        <span class="project-tag">BIM · Revit</span>
+      </div>
+    </div>
+
+    <!-- Structure - Tall -->
+    <div class="project-card tall">
+      <div class="project-image">
+        <img src="imagen4.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Revit · LOD 350 · Coordinación Estructural</span>
+          <p data-lang="es">Modelo estructural aislado del edificio Wezig en Revit, vista posterior. Losa de fundación, núcleo de hormigón armado, retícula de marcos de pilares y vigas. Desarrollado para coordinación BIM con especialidades MEP mediante IFC export.</p>
+          <p data-lang="en">Isolated structural model of the Wezig building in Revit, rear view. Foundation slab, reinforced concrete core, column-beam frame grid and roof. Developed for BIM coordination with MEP specialties via IFC export.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">modelo Estructural · Vista Posterior</span><span data-lang="en">structural Model · Rear View</span></div>
+          <div class="project-meta">Revit · Tekla · LOD 350 · 2020–2021</div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Estructura</span><span data-lang="en">Structure</span></span>
+      </div>
+    </div>
+
+    <!-- Floor Plan - Full width -->
+    <div class="project-card" style="grid-column: span 12;">
+      <div class="project-image" style="aspect-ratio: 21/9;">
+        <img src="imagen5.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Revit · Planta · LOD 350 · 11 Niveles</span>
+          <p data-lang="es">Planta Nivel 00 (Ground Floor) del proyecto Wezig en Revit. Distribución del vestíbulo, núcleo de circulación vertical, estacionamientos y áreas ajardinadas. Panel derecho: árbol de vistas con plantas Nivel 00–11, planos de techo, vistas 3D y tablas de planificación de cantidades — modelo completo para entrega.</p>
+          <p data-lang="en">Level 00 (Ground Floor) plan of the Wezig project in Revit. Entry lobby, vertical circulation core, parking and landscaped areas. Right panel: full view tree with plans Level 00–11, ceiling plans, 3D views and quantity schedule tables — complete model for project delivery.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">planta Arquitectónica · Nivel 00 Ground Floor</span><span data-lang="en">architecture Plan · Ground Floor Level 00</span></div>
+          <div class="project-meta">Revit · 11 <span data-lang="es">niveles modelados</span><span data-lang="en">modeled levels</span> · Schedules · IFC Export · 2020–2021</div>
+        </div>
+        <span class="project-tag">LOD 350 · IFC</span>
+      </div>
+    </div>
+
+
+    <!-- Presto Cubicación -->
+    <div class="project-card wide">
+      <div class="project-image">
+        <img src="imagen6.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Presto · BIM 5D · Cubicación IFC</span>
+          <p data-lang="es">Cubicación y presupuesto del proyecto Wezig en Presto. Tabla de elementos BIM codificados por partidas, materiales y dimensiones — cantidades extraídas directamente desde Revit mediante IFC. Dimensión 5D del ciclo BIM completo del TFM.</p>
+          <p data-lang="en">Quantity takeoff and budget for Wezig in Presto. BIM elements coded by work items, materials and dimensions — quantities extracted directly from Revit via IFC. 5D dimension of the complete BIM cycle from the Master's thesis.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">cubicación &amp; Presupuesto · Presto</span><span data-lang="en">quantity Takeoff &amp; Budget · Presto</span></div>
+          <div class="project-meta">Presto · Revit · IFC · BIM 5D · 2020–2021</div>
+        </div>
+        <span class="project-tag">BIM 5D · Presto</span>
+      </div>
+    </div>
+
+    <!-- Synchro 4D -->
+    <div class="project-card tall">
+      <div class="project-image">
+        <img src="imagen7.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Synchro Pro · BIM 4D · Gantt</span>
+          <p data-lang="es">Programación 4D del proyecto Wezig en Synchro Pro. Vista doble: modelo 3D vinculado al programa Gantt. Secuencia constructiva — cimentación, estructura, cerramientos por planta — visualizada en tiempo real con código de color por estado de avance. Dimensión 4D del ciclo BIM completo del TFM.</p>
+          <p data-lang="en">4D scheduling of Wezig in Synchro Pro. Dual view: 3D model linked to the Gantt program. Construction sequence — foundations, structure, floor enclosures — visualized in real time with color-coded progress status. 4D dimension of the complete BIM cycle from the Master's thesis.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">programación 4d · Synchro Pro</span><span data-lang="en">4d Scheduling · Synchro Pro</span></div>
+          <div class="project-meta">Synchro Pro · Revit · BIM 4D · Gantt · 2020–2021</div>
+        </div>
+        <span class="project-tag">BIM 4D · Synchro</span>
+      </div>
+    </div>
+
+    <!-- FAMILY LODGE LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">Modelado &amp; Coordinación BIM · Cadwork · Revit · Patagual Home</span>
+        <span data-lang="en">BIM Modeling &amp; Coordination · Cadwork · Revit · Patagual Home</span>
+      </div>
+      <div class="proj-label-title">Family Lodge — <em style="font-style:italic;color:var(--gold-light);">Vivienda Modular · 139,95 m² · San Pedro de la Paz</em></div>
+    </div>
+
+    <!-- FAMILY LODGE HERO -->
+    <div class="card-hero">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Proyecto Terminado y Habitado · Fotografía Real · San Pedro de la Paz</span>
+          <span data-lang="en">✦ Completed and Occupied Project · Real Photograph · San Pedro de la Paz</span>
+        </span>
+      </div>
+      <div class="project-image" style="aspect-ratio:16/7;">
+        <img src="imagen8.png" alt="Foto real Family Lodge terminado cocina escalera metálica San Pedro de la Paz">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · WPC Antracita + Madera Natural</span>
+          <p data-lang="es">Fachada terminada con revestimiento Wall Panel Exterior Cladding WPC color antracita en segundo nivel y efecto madera natural en primer nivel. 139,95 m² fabricados en planta y montados en terreno en San Pedro de la Paz. Del modelo Cadwork a la vivienda habitada — exactamente como fue diseñado.</p>
+          <p data-lang="en">The final built result. What began as Cadwork geometry — every panel, beam and opening — became this completed, occupied home in San Pedro de la Paz. 139.95 m² factory-built and installed on-site. The BIM model fulfills its purpose: no surprises on site.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name">Family Lodge <span data-lang="es">· Proyecto Terminado y Construido</span><span data-lang="en">· Completed &amp; Built Project</span></div>
+          <div class="project-meta"><span data-lang="es">Cocina modular · Escalera metálica flotante · Terminaciones en madera · San Pedro de la Paz · Patagual Home</span><span data-lang="en">Modular kitchen · Floating steel staircase · Timber finishes · San Pedro de la Paz · Patagual Home</span></div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);"><span data-lang="es">Obra Real</span><span data-lang="en">Real Build</span></span>
+      </div>
+    </div>
+
+    <!-- FILA 1: [imagen9 | imagen10] izquierda | imagen11 derecha -->
+        <!-- FILA 1: imagen9+10 lado a lado con titulo visible -->
+    <div class="project-card half" style="display:flex;flex-direction:column;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111;flex:1;">
+        <div style="position:relative;overflow:hidden;">
+          <img src="imagen9.png" alt="Family Lodge cocina terminaciones" style="width:100%;height:100%;object-fit:cover;display:block;background:#111;">
+          <div class="project-overlay">
+            <span class="overlay-tag">Foto Real · Cocina · Terminaciones</span>
+            <p data-lang="es">Cocina modular en proceso de terminaciones. Muebles bajo mesón y aéreos en melanina con frentes madera, cubierta de cuarzo blanco. Del modelo Revit al espacio habitable real.</p>
+            <p data-lang="en">Modular kitchen during finishing stage. Melamine base and wall cabinets with timber fronts, white quartz countertop. From Revit model to real living space.</p>
+          </div>
+        </div>
+        <div style="position:relative;overflow:hidden;">
+          <img src="imagen10.png" alt="Family Lodge escalera metálica flotante instalación" style="width:100%;height:100%;object-fit:cover;display:block;background:#111;">
+          <div class="project-overlay">
+            <span class="overlay-tag">Foto Real · Escalera Metálica Flotante</span>
+            <p data-lang="es">Instalación de escalera metálica flotante — estructura de acero negro con peldaños de madera. Colaboradores en terminaciones interiores. Diseñada y coordinada en Revit antes de fabricar.</p>
+            <p data-lang="en">Floating steel staircase installation — black steel structure with timber treads. On-site collaborators during finishing. Designed and coordinated in Revit before fabrication.</p>
+          </div>
+        </div>
+      </div>
+      <div style="padding:1.2rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;background:var(--panel);">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:0.3rem;">
+            <span data-lang="es">Family Lodge · Obra en Proceso de Terminaciones</span>
+            <span data-lang="en">Family Lodge · Work in Finishing Stage</span>
+          </div>
+          <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">
+            Patagual Home · 139,95 m² · 2021–2026
+          </div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Foto Real</span><span data-lang="en">Real Photo</span></span>
+      </div>
+    </div>
+
+<div class="project-card half">
+      <div class="project-image">
+        <img src="imagen11.png" alt="Modelo 3D módulos Cadwork Family Lodge Smart Panel">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · CAD/CAM · Smart Panel</span>
+          <p data-lang="es">Modelo Cadwork con paneles Smart Panel aplicados al entramado. Cada elemento de la envolvente es trazable desde el modelo hasta la lista de corte de fábrica — precisión CAD/CAM al milímetro para producción directa sin reinterpretación en obra.</p>
+          <p data-lang="en">Cadwork model with Smart Panel cladding applied to the timber frame. Every envelope element is traceable from model to factory cut list — CAD/CAM precision to the millimeter for direct production without on-site reinterpretation.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Modelo 3D de Módulos Listos para Exportación a Construcción</span><span data-lang="en">3D Module Model Ready for Construction Export</span></div>
+          <div class="project-meta">Cadwork · CAD/CAM · Smart Panel</div>
+        </div>
+        <span class="project-tag">Cadwork</span>
+      </div>
+    </div>
+
+    <!-- FILA 2: imagen12 | imagen13 -->
+    <div class="project-card half">
+      <div class="project-image">
+        <img src="imagen12.png" alt="Entramado madera Cadwork Family Lodge 3 módulos vista frontal">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Entramado · CNC</span>
+          <p data-lang="es">Vista frontal del entramado de los primeros 3 módulos en Cadwork. Muros portantes, vigas de borde, losas y vanos posicionados con precisión. Cada pieza codificada y lista para corte CNC — sin ambigüedades en producción.</p>
+          <p data-lang="en">Front view of the timber frame for the first 3 modules in Cadwork. Load-bearing walls, edge beams, slabs and openings positioned precisely. Every piece coded and ready for CNC cutting — no ambiguity in production.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Vista Frontal 3D · Entramado 3 Módulos</span><span data-lang="en">3D Front View · 3-Module Frame</span></div>
+          <div class="project-meta">Cadwork · CNC · Smart Panel</div>
+        </div>
+        <span class="project-tag">CNC · Cadwork</span>
+      </div>
+    </div>
+
+    <div class="project-card half">
+      <div class="project-image">
+        <img src="imagen13.png" alt="Entramado madera doble planta Family Lodge 4 módulos Cadwork">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Revit · IFC · MEP</span>
+          <p data-lang="es">Entramado de 2 pisos con los 4 módulos completos del proyecto en Cadwork. Vanos de ventanas y puertas integrados al modelo estructural. Coordinación MEP en Revit + IFC vía BIM Collab — detección de interferencias antes de fabricar garantiza cero errores en obra.</p>
+          <p data-lang="en">2-story frame with all 4 project modules complete in Cadwork. Window and door openings integrated into the structural model. MEP coordination in Revit + IFC via BIM Collab — clash detection before fabrication guarantees zero on-site errors.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Vista 3D · Entramado 4 Módulos Completo</span><span data-lang="en">3D View · Complete 4-Module Frame</span></div>
+          <div class="project-meta">Cadwork · Revit · IFC · BIM Collab</div>
+        </div>
+        <span class="project-tag">MEP · IFC</span>
+      </div>
+    </div>
+
+    <!-- Explosion FULL -->
+    <div class="project-card" style="grid-column: span 12;">
+      <div class="project-image" style="aspect-ratio: 21/9;">
+        <img src="imagen14.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Vista Explosionada · Guía de Montaje</span>
+          <p data-lang="es">Vista explosionada de módulos: fachadas, losas, cubierta y bloque sanitario separados para validación de secuencia de ensamblaje. Esta es la guía que recibe el equipo de fábrica — cada pieza en el lugar correcto, en el orden correcto, sin ambigüedades.</p>
+          <p data-lang="en">Exploded module view: facades, slabs, roof and bathroom block separated for assembly sequence validation. This is the guide received by the factory team — every piece in the right place, in the right order, without ambiguity.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Módulos Explotados · Terminados y Coordinados</span><span data-lang="en">Exploded Modules · Completed &amp; Coordinated</span></div>
+          <div class="project-meta">Cadwork · <span data-lang="es">Prefabricación Industrializada</span><span data-lang="en">Industrialized Prefabrication</span> · Patagual Home</div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Ensamblaje</span><span data-lang="en">Assembly</span></span>
+      </div>
+    </div></div>
+
+
+
+
+    
+        <!-- MEP Family Lodge -->
+    <!-- SUB-LABEL MEP -->
+    <div style="grid-column: span 12; padding: 1rem 0 0.8rem; border-top: 1px solid var(--border); margin-top: 0.5rem;">
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">
+        <span data-lang="es">Especialidades MEP · Revit · Coordinación BIM</span>
+        <span data-lang="en">MEP Specialties · Revit · BIM Coordination</span>
+      </div>
+    </div>
+
+    <!-- FILA 1: Eléctrico + Sanitario -->
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen15.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Revit · MEP · Instalación Eléctrica</span>
+          <p data-lang="es">Red eléctrica completa modelada en Revit: circuitos de iluminación, tomacorrientes, puntos de fuerza y tablero de distribución. Coordinada con arquitectura, estructura y sanitario mediante IFC — cero interferencias entre especialidades antes de fabricar los módulos.</p>
+          <p data-lang="en">Full electrical network modeled in Revit: lighting circuits, power outlets, high-load points and distribution panel. Coordinated with architecture, structure and plumbing via IFC — zero specialty clashes before module fabrication.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">MEP · Proyecto Eléctrico</span><span data-lang="en">MEP · Electrical Project</span></div>
+          <div class="project-meta">Revit · IFC · BIM Collab</div>
+        </div>
+        <span class="project-tag">Revit · MEP</span>
+      </div>
+    </div>
+
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen16.png">
+        <div class="project-overlay">
+          <p data-lang="es">Proyecto sanitario 3D en Revit: redes de agua fría, caliente y alcantarillado con detalle de baño completo. Coordinación IFC con arquitectura y estructura.</p>
+          <p data-lang="en">3D sanitary project in Revit: cold water, hot water, and sewer networks with full bathroom detail. IFC coordination with architecture and structure.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">MEP · Proyecto Sanitario</span><span data-lang="en">MEP · Plumbing Project</span></div>
+          <div class="project-meta">Revit · IFC · <span data-lang="es">Agua fría/caliente</span><span data-lang="en">Cold/Hot water</span></div>
+        </div>
+        <span class="project-tag">Revit · MEP</span>
+      </div>
+    </div>
+
+    <!-- FILA 2: Mobiliario + Plano Técnico -->
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen17.png">
+        <div class="project-overlay">
+          <p data-lang="es">Mobiliario a medida modelado en Revit: cocina modular, closets y muebles de baño. Cada pieza con especificaciones directas para fabricación en taller.</p>
+          <p data-lang="en">Custom furniture modeled in Revit: modular kitchen, closets, and bathroom vanities. Every piece with direct specifications for workshop fabrication.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">mobiliario · Cocina + Closets</span><span data-lang="en">furniture · Kitchen + Closets</span></div>
+          <div class="project-meta">Revit · <span data-lang="es">Fabricación a medida</span><span data-lang="en">Custom fabrication</span> · Patagual Home</div>
+        </div>
+        <span class="project-tag">Revit · <span data-lang="es">Muebles</span><span data-lang="en">Furniture</span></span>
+      </div>
+    </div>
+
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen18.png">
+        <div class="project-overlay">
+          <p data-lang="es">Plano técnico M-02 — Mueble Cocina Frontal E:1/8. Especificaciones de muebles aéreos, base y cubierta: materiales, dimensiones y herrajes. Del modelo Revit directo al taller.</p>
+          <p data-lang="en">Technical drawing M-02 — Kitchen Front Cabinet E:1/8. Wall, base, and countertop cabinet specs: materials, dimensions and hardware. From Revit model directly to workshop.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">plano Técnico M-02 · Cocina Frontal E:1/8</span><span data-lang="en">technical Drawing M-02 · Kitchen Cabinet E:1/8</span></div>
+          <div class="project-meta">Revit · Patagual Home · Ene 2024</div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Plano Técnico</span><span data-lang="en">Technical Drawing</span></span>
+      </div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════ -->
+    <!-- JARDINES DE SAN PEDRO LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">Condominio DS19 · Jardines del Mar · 210 Unidades · Patagual Home</span>
+        <span data-lang="en">DS19 Condominium · Jardines del Mar · 210 Units · Patagual Home</span>
+      </div>
+      <div class="proj-label-title">Jardines del Mar — <em style="font-style:italic;color:var(--gold-light);">210 viviendas DS19 · San Pedro de la Paz</em></div>
+    </div>
+
+    <!-- JARDINES HERO -->
+    <div class="card-hero">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Proyecto Construido y Entregado · 210 Viviendas DS19 · Fotografía Real</span>
+          <span data-lang="en">✦ Built and Delivered Project · 210 DS19 Homes · Real Photograph</span>
+        </span>
+      </div>
+      <div class="project-image" style="aspect-ratio:16/7;">
+        <img src="imagen19.png" alt="Foto real Jardines de San Pedro 210 viviendas DS19 entregadas San Pedro de la Paz">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Jardines del Mar · DS19</span>
+          <p data-lang="es">210 viviendas DS19 construidas y entregadas en San Pedro de la Paz. Condominio con conserjería, control de acceso, zonas deportivas, plazas, bicicleteros y estacionamientos. Cada unidad modelada en Cadwork y coordinada con MEP antes de entrar a producción en fábrica — este resultado construido es la prueba del proceso BIM.</p>
+          <p data-lang="en">Jardines del Mar: 210 DS19 homes in San Pedro de la Paz — a condominium designed for family living, with controlled access, sports areas and plazas. Through the DS19 subsidy, every home was modeled in Cadwork and MEP-coordinated before factory production.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name"><span data-lang="es">Jardines del Mar · 210 Viviendas DS19</span><span data-lang="en">Jardines del Mar · 210 DS19 Homes</span></div>
+          <div class="project-meta">210 <span data-lang="es">unidades · DS19 · +60 m² c/u · Condominio cerrado · Patagual Home</span><span data-lang="en">units · DS19 · +60 m² each · Gated condominium · Patagual Home</span></div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);"><span data-lang="es">Obra Real</span><span data-lang="en">Real Build</span></span>
+      </div>
+    </div>
+
+    <!-- FILA 2: Planta (4) + Cadwork MEP (8) -->
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen20.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Planta · DS19 · 210 unidades</span>
+          <p data-lang="es">Planta arquitectónica de la vivienda tipo en dos pisos: living-comedor-cocina en planta baja, dormitorios y baños en planta alta, con logia y jardín privado. Misma distribución replicada en las 210 unidades — la precisión BIM garantiza consistencia en toda la serie.</p>
+          <p data-lang="en">Two-story typical unit floor plan: living-dining-kitchen on ground floor, bedrooms and bathrooms upstairs, with logia and private garden. Same layout replicated across all 210 units — BIM precision ensures consistency across the entire series.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">planta Arquitectónica · Unidad Tipo</span><span data-lang="en">floor Plan · Typical Unit</span></div>
+          <div class="project-meta"><span data-lang="es">2 pisos · +60 m²</span><span data-lang="en">2 floors · +60 m²</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Planta</span><span data-lang="en">Plan</span></span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
+        <img src="imagen20_2.png" alt="Interior unidad tipo entregada Jardines del Mar dormitorio terminado">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Interior Entregado · DS19</span>
+          <p data-lang="es">Interior de unidad tipo entregada en Jardines del Mar. Dormitorio terminado con piso laminado, mueble flotante de madera, amplio ventanal termopanel e iluminación integrada. Calidad sin concesiones — vivienda DS19 desde el modelo a la llave.</p>
+          <p data-lang="en">Delivered typical unit interior at Jardines del Mar. Finished bedroom with laminate flooring, floating timber vanity, large thermopane window and integrated lighting. No compromises on quality — DS19 housing from model to key handover.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Interior Entregado · Dormitorio Tipo</span><span data-lang="en">Delivered Interior · Typical Bedroom</span></div>
+          <div class="project-meta"><span data-lang="es">Jardines del Mar · DS19 · San Pedro de la Paz</span><span data-lang="en">Jardines del Mar · DS19 · San Pedro de la Paz</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Foto Real</span><span data-lang="en">Real Photo</span></span>
+      </div>
+    </div>
+
+        <div class="project-card tall">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen21.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · IFC · MEP · CNC</span>
+          <p data-lang="es">Entramado de madera Cadwork con instalaciones MEP integradas y visibles. La red sanitaria de los especialistas Revit fue importada vía IFC y superpuesta al modelo estructural — cada interferencia detectada y resuelta digitalmente antes de cortar la primera pieza de madera.</p>
+          <p data-lang="en">Cadwork timber frame with integrated and visible MEP. The specialist plumbing from Revit was imported via IFC and overlaid on the structural model — every clash detected and resolved digitally before the first piece of timber was cut.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">cadwork · Estructura + Mep Coordinado</span><span data-lang="en">cadwork · Frame + Coordinated Mep</span></div>
+          <div class="project-meta">Cadwork · IFC · MEP · CNC</div>
+        </div>
+        <span class="project-tag">Cadwork · MEP</span>
+      </div>
+    </div>
+
+    <!-- Sanitario 3D Jardines -->
+    <div class="project-card" style="grid-column: span 12;">
+      <div class="project-image" style="aspect-ratio: 21/9;">
+        <img src="imagen22.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · IFC · Coordinación Sanitaria · 210 unidades</span>
+          <p data-lang="es">Vista panorámica del modelo sanitario de Jardines de San Pedro en Cadwork. Red completa de alcantarillado, agua fría y accesorios coordinados con la estructura de madera mediante IFC. A escala de 210 unidades, un clash en obra es inasumible — todo se resuelve en el modelo.</p>
+          <p data-lang="en">Panoramic view of the Jardines de San Pedro plumbing model in Cadwork. Complete sewage, cold water and fixtures coordinated with timber structure via IFC. At 210-unit scale, an on-site clash is simply not an option — everything is resolved in the model.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">3d Especialidad Sanitario · Proceso De Coordinación</span><span data-lang="en">3d Plumbing Specialty · Coordination Process</span></div>
+          <div class="project-meta">Cadwork · IFC · <span data-lang="es">Coordinación BIM · Alcantarillado + Agua Fría</span><span data-lang="en">BIM Coordination · Sewage + Cold Water</span></div>
+        </div>
+        <span class="project-tag">BIM · Sanitario</span>
+      </div>
+    </div>
+
+    <!-- FILA 3: Módulos 3D (4) + Plano (4) + Montaje (4) -->
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen23.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · CAD/CAM · Smart Panel</span>
+          <p data-lang="es">Módulos 3D completos con Smart Panel y aislación aplicados al entramado. El modelo Cadwork genera directamente la lista de corte — dimensiones, ángulos y perforaciones — que entra sin modificaciones a la máquina CNC. Cero desperdicios, cero errores de medida.</p>
+          <p data-lang="en">Complete 3D modules with Smart Panel cladding and insulation applied to the frame. The Cadwork model directly generates the cut list — dimensions, angles and perforations — that feeds the CNC machine without modifications. Zero waste, zero measurement errors.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">módulos 3d Listos Para Exportar A Construcción</span><span data-lang="en">3d Modules Ready For Construction Export</span></div>
+          <div class="project-meta">Cadwork · Smart Panel · CAD/CAM</div>
+        </div>
+        <span class="project-tag">CAD/CAM</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
+        <img src="imagen23_2.jpg" alt="Render interior Puelo Original living comedor escalera madera">
+        <div class="project-overlay">
+          <span class="overlay-tag">Render Interior · Living · Puelo Original</span>
+          <p data-lang="es">Render del interior de la vivienda Puelo Original. Living-comedor integrado con escalera de madera natural que conecta ambos pisos. Piso vinílico, cocina equipada al fondo y espacios funcionales — visualización del modelo Cadwork llevada a render fotorrealista para el proceso de venta.</p>
+          <p data-lang="en">Interior render of the Puelo Original home. Integrated living-dining space with natural timber staircase connecting both floors. Vinyl flooring, equipped kitchen in the background — Cadwork model taken to photorealistic render for the sales process.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Render Interior · Living + Escalera</span><span data-lang="en">Interior Render · Living + Staircase</span></div>
+          <div class="project-meta"><span data-lang="es">Puelo Original · Visualización interior · DS49/DS10</span><span data-lang="en">Puelo Original · Interior visualization · DS49/DS10</span></div>
+        </div>
+        <span class="project-tag">Render</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen24.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Plano de Montaje · TBS</span>
+          <p data-lang="es">Plano de montaje con detalles constructivos a escala: cortes verticales, vistas frontales de paneles y especificaciones de fijación TBS. Generado automáticamente desde Cadwork — el plano es el modelo, sin posibilidad de discrepancias.</p>
+          <p data-lang="en">Assembly drawing with scaled construction details: vertical sections, panel front views and TBS fixing specs. Automatically generated from Cadwork — the drawing is the model, with no possibility of discrepancies.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">plano De Montaje · Detalles Constructivos</span><span data-lang="en">assembly Drawing · Construction Details</span></div>
+          <div class="project-meta">Cadwork · <span data-lang="es">Detalles CNC</span><span data-lang="en">CNC Details</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Plano Técnico</span><span data-lang="en">Technical Drawing</span></span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen25.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Montaje · Prefabricado</span>
+          <p data-lang="es">Vista aérea real del montaje en Jardines del Mar. Grúa roja posicionando módulos prefabricados entre las calles del condominio ya instaladas. Decenas de unidades terminadas a ambos lados — la velocidad de construcción 4 veces mayor que la tradicional es visible en esta imagen.</p>
+          <p data-lang="en">Real aerial view of assembly at Jardines del Mar. Red crane positioning prefabricated modules between already-installed condominium rows. Dozens of completed units on both sides — construction speed 4x faster than traditional is visible in this image.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">montaje En Terreno · Vista Aérea</span><span data-lang="en">on-site Assembly · Aerial View</span></div>
+          <div class="project-meta"><span data-lang="es">San Pedro de la Paz · Prefabricado · Grúa</span><span data-lang="en">San Pedro de la Paz · Prefab · Crane</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Foto Real</span><span data-lang="en">Real Photo</span></span>
+      </div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════ -->
+    <!-- PUELO NATIVA LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">Vivienda Social Industrializada · DS49 / DS10 · Patagual Home · Lebu</span>
+        <span data-lang="en">Industrialized Social Housing · DS49 / DS10 · Patagual Home · Lebu</span>
+      </div>
+      <div class="proj-label-title">Puelo Nativa — <em style="font-style:italic;color:var(--gold-light);">49,2 m² · Lebu · Familias afectadas por incendios</em></div>
+    </div>
+
+    <!-- PUELO NATIVA HERO -->
+    <div class="card-hero">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Proyecto de Vivienda Definitiva · Solución Estatal para Familias Afectadas por Incendios y Catástrofes</span>
+          <span data-lang="en">✦ Permanent Housing Project · State Solution for Families Affected by Fires and Disasters</span>
+        </span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="imagen26.png" alt="Foto real Puelo Nativa vivienda definitiva construida Lebu DS49 DS10" style="width:100%;height:100%;object-fit:contain;background:#111;">
+        </div>
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="imagen27.png" alt="Montaje Puelo Nativa grúa Lebu módulos prefabricados" style="width:100%;height:100%;object-fit:contain;background:#111;">
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name"><span data-lang="es">Puelo Nativa · Vivienda Definitiva Construida y Montada en Lebu</span><span data-lang="en">Puelo Nativa · Permanent Home Built and Installed in Lebu</span></div>
+          <div class="project-meta">49,2 m² · DS49 / DS10 · <span data-lang="es">Fabricada en 90 días · Montaje con grúa · Patagual Home</span><span data-lang="en">Built in 90 days · Crane assembly · Patagual Home</span></div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);"><span data-lang="es">Impacto Social</span><span data-lang="en">Social Impact</span></span>
+      </div>
+    </div>
+
+    <!-- FILA 2: Planta (4) + Módulos 3D (4) + Explosión (4) -->
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen28.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Planta · DS49/DS10 · 2D+1B / 3D+1B</span>
+          <p data-lang="es">Distribución compacta en 49,2 m²: 2 dormitorios, 1 baño y living-cocina-comedor integrado. Cumple norma DS49/DS10 para postulación a subsidio estatal. Versión extendida con 3 dormitorios para familias numerosas.</p>
+          <p data-lang="en">Compact layout in 49.2 m²: 2 bedrooms, 1 bathroom and integrated living-kitchen-dining. Complies with DS49/DS10 for state subsidy application. Extended 3-bedroom version for larger families.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">planta · 2d+1b / Versión 3d+1b</span><span data-lang="en">floor Plan · 2bed+1bath / 3bed+1bath</span></div>
+          <div class="project-meta">49,2 m² · DS49 · DS10</div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Planta</span><span data-lang="en">Plan</span></span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen29.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Revit · IFC · Smart Panel</span>
+          <p data-lang="es">Módulos modelados y coordinados para exportación. Envolvente con Smart Panel, cubierta metálica y porche integrados. Las instalaciones MEP de especialistas en Revit fueron importadas vía IFC y coordinadas con la geometría Cadwork — modelo integrado como única fuente de datos.</p>
+          <p data-lang="en">Modules modeled and coordinated for production export. Smart Panel cladding, metal roof and porch integrated. Specialist MEP from Revit imported via IFC and coordinated with Cadwork geometry — integrated model as single source of truth.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">módulos Modelados Y Coordinados Para Exportación</span><span data-lang="en">modules Modeled & Coordinated For Export</span></div>
+          <div class="project-meta">Cadwork · Revit · IFC · Smart Panel</div>
+        </div>
+        <span class="project-tag">Cadwork · MEP</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen30.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Vista Explosionada · CNC</span>
+          <p data-lang="es">Vista explosionada del módulo Puelo Nativa: estructura de madera, paneles de fachada, losa, cubierta metálica y bloque sanitario separados para validación de ensamblaje. Base para generar la lista de corte CNC y las instrucciones de montaje en fábrica.</p>
+          <p data-lang="en">Exploded view of the Puelo Nativa module: timber structure, facade panels, slab, metal roof and bathroom block separated for assembly validation. Basis for generating the CNC cut list and factory assembly instructions.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">vista Explosionada · Validación De Ensamblaje</span><span data-lang="en">exploded View · Assembly Validation</span></div>
+          <div class="project-meta">Cadwork · CNC · <span data-lang="es">Lista de Corte</span><span data-lang="en">Cut List</span></div>
+        </div>
+        <span class="project-tag">CNC · Cadwork</span>
+      </div>
+    </div>
+
+    <!-- FILA 3: Interior (6) + Estructura MEP (6) -->
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen31.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Interior · Coordinación MEP</span>
+          <p data-lang="es">Vista interior sin cubierta: distribución de recintos, muros divisorios, y especialidades sanitaria y eléctrica coordinadas con Revit e integradas al modelo. Las terminaciones interiores — revestimientos, cielos y pisos — están especificadas antes de iniciar la fabricación.</p>
+          <p data-lang="en">Interior view without roof: room distribution, partition walls, and plumbing and electrical specialties coordinated with Revit and integrated into the model. Interior finishes — cladding, ceilings and floors — specified before fabrication begins.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">vista Interior · Recintos + Terminaciones</span><span data-lang="en">interior View · Rooms + Finishes</span></div>
+          <div class="project-meta">Cadwork · IFC · <span data-lang="es">Coordinación MEP</span><span data-lang="en">MEP Coordination</span></div>
+        </div>
+        <span class="project-tag">MEP · IFC</span>
+      </div>
+    </div>
+
+    <div class="project-card half">
+      <div class="project-image" style="aspect-ratio: 16/10;">
+        <img src="imagen32.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · BIM Collab · IFC</span>
+          <p data-lang="es">Entramado estructural completo con MEP integrado: instalaciones eléctricas, sanitarias y corrientes débiles superpuestas a la estructura de madera. Coordinación en BIM Collab mediante IFC — cada colisión entre especialidades detectada y resuelta digitalmente antes de iniciar producción en fábrica.</p>
+          <p data-lang="en">Complete structural frame with integrated MEP: electrical, plumbing and low-voltage systems overlaid on the timber structure. Coordination in BIM Collab via IFC — every specialty clash detected and resolved digitally before factory production begins.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">estructura + Mep Coordinado · Bim Collab</span><span data-lang="en">structure + Coordinated Mep · Bim Collab</span></div>
+          <div class="project-meta">Cadwork · BIM Collab · Revit · IFC</div>
+        </div>
+        <span class="project-tag">BIM Collab · IFC</span>
+      </div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════ -->
+    <!-- PUELO ORIGINAL LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">Vivienda Modular Industrializada · DS49 / DS10 · Patagual Home · +800 Viviendas Construidas</span>
+        <span data-lang="en">Industrialized Modular Housing · DS49 / DS10 · Patagual Home · +800 Homes Built</span>
+      </div>
+      <div class="proj-label-title">Puelo Original — <em style="font-style:italic;color:var(--gold-light);">+800 Viviendas · Las Bandurrias · DS49/DS10</em></div>
+    </div>
+
+    <!-- PUELO ORIGINAL HERO -->
+    <div class="card-hero">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Izquierda: Proyecto Piloto Construido · Derecha: Render del Proyecto</span>
+          <span data-lang="en">✦ Left: Built Pilot Project · Right: Project Render</span>
+        </span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;">
+        <div style="overflow:hidden;min-height:280px;">
+          <img src="imagen33.jpg" alt="Foto real Puelo Original proyecto piloto construido DS49" style="width:100%;height:100%;object-fit:contain;background:#111;">
+        </div>
+        <div style="overflow:hidden;min-height:280px;">
+          <img src="imagen34.png" alt="Render Puelo Original vivienda DS49 DS10 subsidio estatal" style="width:100%;height:100%;object-fit:contain;background:#111;">
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name"><span data-lang="es">Puelo Original · Las Bandurrias · +800 Viviendas DS49/DS10</span><span data-lang="en">Puelo Original · Las Bandurrias · +800 DS49/DS10 Homes</span></div>
+          <div class="project-meta">50,8 m² · 2 <span data-lang="es">pisos · DS49 / DS10 · Postulación por Comités de Vivienda · Patagual Home</span><span data-lang="en">floors · DS49 / DS10 · Application via Housing Committees · Patagual Home</span></div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);"><span data-lang="es">+800 Viviendas</span><span data-lang="en">+800 Homes</span></span>
+      </div>
+    </div>
+
+    <!-- FILA 2: Planta (4) + Módulos 3D (4) + Explosión (4) -->
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen35.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Planta · DS49 / DS10 · 50,8 m²</span>
+          <p data-lang="es">Plantas de los dos pisos: planta baja con living-comedor, cocina y baño; planta alta con 2 dormitorios. Distribución optimizada para DS49/DS10 en 50,8 m². El modelo Cadwork es la misma fuente para planta, estructura, MEP y lista de corte CNC — con más de 800 unidades fabricadas, la coherencia del modelo es crítica.</p>
+          <p data-lang="en">Floor plans for both levels: ground floor with living-dining, kitchen and bathroom; upper floor with 2 bedrooms. Layout optimized for DS49/DS10 in 50.8 m². The Cadwork model is the single source for floor plan, structure, MEP and CNC cut list — with over 800 units fabricated, model coherence is critical.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">plantas · 2 Pisos / Versión Ampliada</span><span data-lang="en">floor Plans · 2 Floors / Extended</span></div>
+          <div class="project-meta">50,8 m² · 2D+1B / 3D+1B</div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Planta</span><span data-lang="en">Plan</span></span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen36.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Smart Panel · CAD/CAM · +800 unidades</span>
+          <p data-lang="es">Módulo 3D completo del Puelo Original en Cadwork. Construcción 90% industrializada con tecnología robotizada — 4 veces más rápido que la construcción tradicional. Sin uso de agua en ninguna etapa del proceso. La geometría del modelo alimenta directamente la línea CNC con la misma precisión en las +800 unidades construidas.</p>
+          <p data-lang="en">Complete 3D module with final envelope: Smart Panel cladding, metal roof and logia modeled in Cadwork. This model geometry is the direct CNC input — over 800 units fabricated with the same precision, no variation between units.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">módulo 3d · Exterior Completo</span><span data-lang="en">3d Module · Full Exterior</span></div>
+          <div class="project-meta">Cadwork · Smart Panel · CAD/CAM</div>
+        </div>
+        <span class="project-tag">Cadwork</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio: 4/3;">
+        <img src="imagen37.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Vista Explosionada · Prefabricación</span>
+          <p data-lang="es">Vista explosionada por niveles: paneles de fachada, losa de primer piso, estructura de segundo piso, cubierta y módulo de logia separados. Con más de 800 unidades fabricadas, la claridad del proceso es crítica para mantener velocidad y calidad.</p>
+          <p data-lang="en">Level-by-level exploded view: facade panels, first floor slab, second floor structure, roof and logia module separated. With over 800 units fabricated, process clarity is critical to maintaining speed and quality.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">vista Explosionada · Módulos Por Nivel</span><span data-lang="en">exploded View · Modules By Level</span></div>
+          <div class="project-meta">Cadwork · <span data-lang="es">Ensamblaje · Prefabricación</span><span data-lang="en">Assembly · Prefabrication</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Ensamblaje</span><span data-lang="en">Assembly</span></span>
+      </div>
+    </div>
+
+    <!-- FILA 3: Estructura MEP full width -->
+    <div class="project-card" style="grid-column: span 12;">
+      <div class="project-image" style="aspect-ratio: 21/9;">
+        <img src="imagen38.png">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Revit · IFC · BIM Collab</span>
+          <p data-lang="es">Entramado estructural de dos pisos con MEP coordinado: instalaciones sanitarias de Revit integradas vía IFC. Vista completa del sistema constructivo — la escala de +800 unidades fabricadas con este modelo valida que el proceso BIM funciona: cero interferencias detectadas en obra en toda la serie.</p>
+          <p data-lang="en">Two-story structural frame with coordinated MEP: plumbing from Revit integrated via IFC. Full view of the construction system — the scale of +800 units fabricated with this model validates that the BIM process works: zero on-site clashes across the entire series.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">estructura 2 Pisos + Mep Coordinado · Vista Completa</span><span data-lang="en">2-floor Structure + Coordinated Mep · Full View</span></div>
+          <div class="project-meta">Cadwork · Revit · IFC · BIM Collab</div>
+        </div>
+        <span class="project-tag">MEP · IFC</span>
+      </div>
+    </div>
+
+    <!-- FILA 4: SOL DE QUILÓN — 3 imágenes en un recuadro -->
+    <!-- Sol de Quillón sub-label -->
+    <div style="grid-column: span 12; padding: 1.2rem 0 0.8rem; border-top: 1px solid var(--border); margin-top: 0.5rem;">
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">
+        <span data-lang="es">Ejemplo de Proyecto Real · Sol de Quillón · 54 Viviendas Puelo Original · Proceso de Instalación y Montaje</span>
+        <span data-lang="en">Real Project Example · Sol de Quillón · 54 Puelo Original Homes · Installation and Assembly Process</span>
+      </div>
+    </div>
+
+    <!-- imagen39+40+41: Sol de Quillón triple card con titulo visible -->
+    <div class="project-card full" style="display:flex;flex-direction:column;border:1px solid var(--gold-dim);">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#111;flex:1;">
+        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
+          <img src="imagen39.png" alt="Sol de Quillón montaje módulos prefabricados fase inicial" style="width:100%;height:100%;object-fit:cover;display:block;background:#111;">
+          <div class="project-overlay">
+            <span class="overlay-tag">Foto Real · Montaje Fase 1</span>
+            <p data-lang="es">Vista frontal del proceso de montaje en Sol de Quillón. Módulos del Puelo Original apilados en terreno antes del izaje. Dos pisos ensamblados en horas — lo que en construcción tradicional tomaría semanas.</p>
+            <p data-lang="en">Front view of the assembly process at Sol de Quillón. Puelo Original modules stacked on site before lifting. Two floors assembled in hours — what traditional construction would take weeks to achieve.</p>
+          </div>
+        </div>
+        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
+          <img src="imagen40.png" alt="Sol de Quillón vista aérea módulos prefabricados instalados grúa" style="width:100%;height:100%;object-fit:cover;display:block;background:#111;">
+          <div class="project-overlay">
+            <span class="overlay-tag">Foto Real · Vista Aérea · Proceso</span>
+            <p data-lang="es">Vista aérea del conjunto en proceso de montaje. Docenas de módulos Puelo Original posicionados en sus fundaciones — la velocidad de instalación es consecuencia directa del modelo BIM: todo dimensionado y coordinado antes de llegar a terreno.</p>
+            <p data-lang="en">Aerial view of the full assembly in progress. Dozens of Puelo Original modules positioned on their foundations — installation speed is a direct consequence of the BIM model: everything dimensioned and coordinated before reaching the site.</p>
+          </div>
+        </div>
+        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
+          <img src="imagen41.png" alt="Sol de Quillón izaje módulo segundo piso grúa apilamiento" style="width:100%;height:100%;object-fit:cover;display:block;background:#111;">
+          <div class="project-overlay">
+            <span class="overlay-tag">Foto Real · Izaje · Apilamiento</span>
+            <p data-lang="es">Izaje del módulo de segundo piso sobre el módulo inferior ya instalado. La unión entre módulos — estructura, impermeabilización y empalmes de especialidades — fue diseñada en el modelo BIM y ejecutada sin improvisaciones en terreno.</p>
+            <p data-lang="en">Lifting of the second floor module onto the already-installed lower module. The connection between modules — structure, waterproofing and specialty splices — was designed in the BIM model and executed without improvisation on site.</p>
+          </div>
+        </div>
+      </div>
+      <div style="padding:1.2rem 1.5rem;border-top:1px solid var(--gold-dim);display:flex;justify-content:space-between;align-items:flex-end;background:var(--panel);">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:0.3rem;">
+            <span data-lang="es">Sol de Quillón · Proceso de Instalación y Montaje de Módulos</span>
+            <span data-lang="en">Sol de Quillón · Module Installation and Assembly Process</span>
+          </div>
+          <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">
+            <span data-lang="es">54 viviendas Puelo Original · Módulos prefabricados · Montaje con grúa · Patagual Home</span>
+            <span data-lang="en">54 Puelo Original homes · Prefabricated modules · Crane assembly · Patagual Home</span>
+          </div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);">Sol de Quillón</span>
+      </div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════ -->
+    <!-- EDIFICIO MODULAR LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">⚡ En Venta · Condominio NOW · Edificio Modular Madera + Acero · Patagual Home</span>
+        <span data-lang="en">⚡ For Sale · Condominio NOW · Modular Timber + Steel Building · Patagual Home</span>
+      </div>
+      <div class="proj-label-title">
+        <span data-lang="es">Edificio Modular en Altura — <em style="font-style:italic;color:var(--gold-light);">210 Departamentos · Madera + Acero · En Ejecución</em></span>
+        <span data-lang="en">High-Rise Modular Building — <em style="font-style:italic;color:var(--gold-light);">210 Apartments · Timber + Steel · Under Execution</em></span>
+      </div>
+      <p class="proj-label-desc">
+        <span data-lang="es">⚡ Proyecto en venta — Condominio NOW San Pedro N°4350. Departamentos estudio (23 m²), 1 dorm (28 m²) y 2 dorm (47 m²) construidos con tecnología modular robotizada alemana. Termopanel marco PVC, piso vinílico integral, full eléctrico con encimera y campana, revestimiento PVC alveolar en baños. Sala multiuso, juegos infantiles, perímetro cerrado y acceso controlado. Ubicado cerca de Biotren, Supermercado Líder y Outlet Parque Arauco. 210 departamentos industrializados en altura con estructura mixta madera-acero — coordinación MEP multidisciplinar integrada al mismo modelo Cadwork.</span>
+        <span data-lang="en">⚡ Project on sale — Condominio NOW San Pedro N°4350. Studio (23 m²), 1-bed (28 m²) and 2-bed (47 m²) apartments built with German robotic modular technology. PVC-frame thermopane windows, full vinyl flooring, all-electric kitchen with hob and hood, PVC alveolar bathroom cladding. Multiuse room, playground, closed perimeter and controlled access. Located near Biotren station, Líder supermarket and Parque Arauco outlet. 210 industrialized high-rise apartments with a mixed timber-steel structure — multidisciplinary MEP coordination integrated in the same Cadwork model.</span>
+      </p>
+    </div>
+
+    
+    <!-- EDIFICIO MODULAR RENDERS -->
+    <div class="card-hero" style="border-color:var(--gold);">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Condominio NOW · En Venta · 3 Modelos: Estudio 23m² · Simple 28m² · Doble 47m²</span>
+          <span data-lang="en">✦ Condominio NOW · For Sale · 3 Models: Studio 23m² · Simple 28m² · Double 47m²</span>
+        </span>
+      </div>
+      <div class="render-stack">
+        <img src="imagen42.png" alt="Render condominio Edificio Now 210 departamentos vista exterior volumetría">
+        <img src="imagen43.png" alt="Render condominio Edificio Now vista lateral fachada madera pasarelas">
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name"><span data-lang="es">Renders · Condominio Edificio Now</span><span data-lang="en">Renders · Now Building Condominium</span></div>
+          <div class="project-meta"><span data-lang="es">Referencia de diseño y volumetría · 210 departamentos · Madera + Acero · Patagual Home</span><span data-lang="en">Design and volumetric reference · 210 apartments · Timber + Steel · Patagual Home</span></div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);">Render</span>
+      </div>
+    </div>
+
+<!-- Fachada paneles + Estructura metálica — fila grande -->
+    <div class="project-card large">
+      <div class="project-image">
+        <img src="imagen44.jpg">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Tabiquería Madera · Módulos Apilados · 210 deptos</span>
+          <p data-lang="es">Entramado estructural de múltiples módulos de departamentos apilados en Cadwork — Edificio Now. Cada módulo modelado pieza a pieza: muros portantes, losas y tabiquería interior replicados en los 210 departamentos con precisión CNC. Cada fila de celdas es un piso completo de departamentos coordinados — la escala del modelo hace visible la complejidad del proyecto.</p>
+          <p data-lang="en">Structural timber frame of multiple stacked apartment modules in Cadwork — Now Building. Each module modeled piece by piece: load-bearing walls, slabs and interior partitions replicated across all 210 apartments with CNC precision. Each row of cells is a complete floor of coordinated apartments — the model scale reveals the full complexity of the project.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">estructura Tabiqueria De Madera Edificio Now - Modelo 3d Modulos</span><span data-lang="en">facade · Smart Panel Cladding + Modules</span></div>
+          <div class="project-meta">Cadwork · Smart Panel · 210 <span data-lang="es">departamentos</span><span data-lang="en">apartments</span></div>
+        </div>
+        <span class="project-tag">Cadwork · CAD/CAM</span>
+      </div>
+    </div>
+
+    <!-- Estructura metálica pasarelas -->
+    <div class="project-card medium">
+      <div class="project-image">
+        <img src="imagen45.jpg">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Acero + Madera · Sistema Mixto</span>
+          <p data-lang="es">Estructura metálica de pasarelas de circulación, escaleras de acceso exterior y cubierta del Edificio Now, modelada en Cadwork. Sistema mixto madera-acero coordinado en un único modelo BIM — cada perfil metálico posicionado y dimensionado para fabricación directa, sin planos intermedios.</p>
+          <p data-lang="en">Steel structure for circulation walkways, exterior access stairs and roof of the Now Building, modeled in Cadwork. Mixed timber-steel system coordinated in a single BIM model — every steel profile positioned and dimensioned for direct fabrication, without intermediate drawings.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">estructura Metálica · Pasarelas + Escaleras</span><span data-lang="en">steel Structure · Walkways + Stairs</span></div>
+          <div class="project-meta">Cadwork · <span data-lang="es">Acero + Madera · Sistema Mixto</span><span data-lang="en">Steel + Timber · Mixed System</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Acero · Madera</span><span data-lang="en">Steel · Timber</span></span>
+      </div>
+    </div>
+
+    <!-- Vista pasarela interior perspectiva -->
+    <div class="project-card medium">
+      <div class="project-image">
+        <img src="imagen46.jpg">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · BIM · Coordinación MEP</span>
+          <p data-lang="es">Vista perspectiva de la pasarela interior del Edificio Now en Cadwork. Integración entre paneles de fachada de madera, estructura metálica de cubierta y accesos a departamentos — toda la geometría del sistema mixto coordinada con especialidades MEP en el mismo modelo. Usada para validar espacios y circulaciones antes de fabricar.</p>
+          <p data-lang="en">Perspective view of the Now Building's interior walkway in Cadwork. Integration between timber facade panels, steel roof structure and apartment access areas — the entire mixed system geometry coordinated with MEP specialties in the same model. Used to validate spaces and circulation before fabrication.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">pasarela Interior · Vista Perspectiva</span><span data-lang="en">interior Walkway · Perspective View</span></div>
+          <div class="project-meta">Cadwork · <span data-lang="es">Madera + Metal · Coordinación BIM</span><span data-lang="en">Timber + Steel · BIM Coordination</span></div>
+        </div>
+        <span class="project-tag">BIM · Cadwork</span>
+      </div>
+    </div>
+
+    <!-- Vista planta baja MEP + Estructura completa -->
+    <div class="project-card wide">
+      <div class="project-image">
+        <img src="imagen47.jpg">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · IFC · MEP · BIM Collab</span>
+          <p data-lang="es">Vista de planta baja del Edificio Now con instalaciones MEP coordinadas y visibles sobre la estructura. Red de tuberías, tableros eléctricos y corrientes débiles integrados al modelo Cadwork mediante IFC — cada interferencia detectada y resuelta en BIM Collab antes de ingresar a fabricación. A esta escala, un clash en obra es inasumible.</p>
+          <p data-lang="en">Ground floor view of the Now Building with coordinated MEP visible over the structure. Piping networks, electrical panels and low-voltage systems integrated into the Cadwork model via IFC — every clash detected and resolved in BIM Collab before fabrication. At this scale, an on-site clash is simply not an option.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">planta Baja · Mep Coordinado + Estructura</span><span data-lang="en">ground Floor · Coordinated Mep + Structure</span></div>
+          <div class="project-meta">Cadwork · IFC · MEP · BIM Collab</div>
+        </div>
+        <span class="project-tag">MEP · IFC</span>
+      </div>
+    </div>
+    <div class="project-card third">
+      <div class="project-image">
+        <img src="imagen48.png" alt="Modelo 3D sanitario redes incendio Edificio Now previo coordinación MEP">
+        <div class="project-overlay">
+          <span class="overlay-tag">MEP · Sanitario + Incendio · Pre-Coordinación</span>
+          <p data-lang="es">Modelo 3D de la especialidad sanitaria y redes de incendio del Edificio Now, previo a la etapa de coordinación con la estructura. Vista del alcance de las instalaciones antes de la detección de interferencias en BIM Collab — punto de partida de la coordinación multidisciplinar.</p>
+          <p data-lang="en">3D model of the plumbing and fire suppression network of the Now Building, prior to structural coordination. View showing the scope of the installations before clash detection in BIM Collab — the starting point of multidisciplinary coordination.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Sanitario + Redes de Incendio · Previo a Coordinación</span><span data-lang="en">Plumbing + Fire Networks · Pre-Coordination</span></div>
+          <div class="project-meta"><span data-lang="es">Previo a coordinación con estructura · BIM Collab</span><span data-lang="en">Prior to structural coordination · BIM Collab</span></div>
+        </div>
+        <span class="project-tag">MEP · Incendio</span>
+      </div>
+    </div>
+
+    <!-- Estructura madera completa del edificio - FULL WIDTH -->
+    <div class="project-card" style="grid-column: span 12;">
+      <div class="project-image" style="aspect-ratio: 21/9;">
+        <img src="imagen49.png" >
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · CNC · Prefabricación a Escala · 210 deptos</span>
+          <p data-lang="es">Entramado estructural completo del Edificio Now en Cadwork. Cada módulo modelado pieza a pieza: muros portantes, losas, vigas y viguetas replicados en los 210 departamentos con precisión CNC. Decenas de miles de piezas coordinadas con MEP y estructura metálica — el mayor nivel de complejidad BIM del portafolio. Proyecto actualmente en ejecución.</p>
+          <p data-lang="en">Complete structural timber frame of the Now Building in Cadwork. Every module modeled piece by piece: load-bearing walls, slabs, beams and joists replicated across all 210 apartments with CNC precision. Tens of thousands of coordinated pieces integrated with MEP and steel structure — the highest BIM complexity in the portfolio. Project currently under construction.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">frontis Modelo 3d Coordinado. Modulos De Departamentos, Estructura Pasarela Metalica</span><span data-lang="en">full Building Structure · 210 Modules · Under Execution</span></div>
+          <div class="project-meta">Cadwork · CNC · <span data-lang="es">Prefabricación a escala · Patagual Home · 2024–2026</span><span data-lang="en">Large-scale prefabrication · Patagual Home · 2024–2026</span></div>
+        </div>
+        <span class="project-tag" style="border-color: var(--gold); color: var(--gold);">
+          <span data-lang="es">⚡ En Ejecución</span><span data-lang="en">⚡ Under Execution</span>
+        </span>
+      </div>
+    </div>
+
+  
+    <!-- ══════════════════════════════════════════ -->
+    <!-- REFUGIO ORIENTE LABEL -->
+    <div class="proj-label">
+      <div class="proj-label-sub">
+        <span data-lang="es">⚡ En Venta · 54 Casas Construidas · 2 Proyectos Más en Camino · Patagual Home</span>
+        <span data-lang="en">⚡ For Sale · 54 Homes Built · 2 More Projects Coming · Patagual Home</span>
+      </div>
+      <div class="proj-label-title">
+        <span data-lang="es">Refugio Oriente — <em style="font-style:italic;color:var(--gold-light);">3 Dorm · 2 Baños · 71 m² · Tecnología Alemana</em></span>
+        <span data-lang="en">Refugio Oriente — <em style="font-style:italic;color:var(--gold-light);">3 Bed · 2 Bath · 71 m² · German Technology</em></span>
+      </div>
+      <p class="proj-label-desc">
+        <span data-lang="es">Casas construidas con moderna tecnología alemana. Madera de pino radiata calibrada 4 caras, doble secado e impregnado, graduada estructural. Resistencia sísmica, al fuego, anti-termitas y hongos, y aislación térmica EIFS. 2 modelos con arquitectura de líneas simples — cocina equipada con horno eléctrico, encimera y cubierta de granito, piso vinílico, calefactores de bajo consumo y ventanas termopanel.</span>
+        <span data-lang="en">Homes built with modern German technology. 4-sided calibrated radiata pine timber, double dried and treated, structural grade. Seismic resistance, fire resistance, anti-termite and fungal protection, EIFS thermal insulation. 2 models with clean-line architecture — equipped kitchen with electric oven, hob and granite countertop, vinyl flooring, low-consumption heaters and thermopane windows.</span>
+      </p>
+    </div>
+
+    <!-- REFUGIO ORIENTE HERO: foto terminado + proceso terminaciones -->
+    <div class="card-hero">
+      <div class="card-hero-bar">
+        <span class="card-hero-bar-text">
+          <span data-lang="es">✦ Proyecto Construido y en Venta · 54 Casas Terminadas · Fotografía Real</span>
+          <span data-lang="en">✦ Built Project For Sale · 54 Completed Homes · Real Photograph</span>
+        </span>
+      </div>
+      <div class="project-image" style="aspect-ratio:16/7;">
+        <img src="imagen50.jpg" alt="Refugio Oriente foto real terminado fachada EIFS gris blanco ventanas PVC madera" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Proyecto Terminado · Listo para Entrega</span>
+          <p data-lang="es">Refugio Oriente terminado y listo para entrega a clientes. Fachada con revestimiento EIFS gris oscuro en primer nivel y blanco en segundo nivel, con siding de fibrocemento PVC efecto madera café en terminaciones de ventanas. 54 casas construidas con tecnología modular alemana de madera de pino radiata — lo que se modela en Cadwork es lo que se entrega.</p>
+          <p data-lang="en">Refugio Oriente completed and ready for client handover. Facade with dark grey EIFS cladding on the first level and white on the second, with wood-effect PVC fibre cement siding at window trims. 54 homes built with German modular timber technology using radiata pine — what is modeled in Cadwork is what gets delivered.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name card-hero-name">
+            <span data-lang="es">Refugio Oriente · Proyecto Terminado y en Venta</span>
+            <span data-lang="en">Refugio Oriente · Completed Project For Sale</span>
+          </div>
+          <div class="project-meta">
+            <span data-lang="es">54 casas · 71 m² · 3 dorm + 2 baños · EIFS + Siding PVC café · Patagual Home</span>
+            <span data-lang="en">54 homes · 71 m² · 3 bed + 2 bath · EIFS + Wood-effect PVC siding · Patagual Home</span>
+          </div>
+        </div>
+        <span class="project-tag" style="border-color:var(--gold);color:var(--gold);"><span data-lang="es">Obra Real</span><span data-lang="en">Real Build</span></span>
+      </div>
+    </div>
+
+    <!-- imagen51: proceso terminaciones exteriores -->
+    <div class="project-card large">
+      <div class="project-image">
+        <img src="imagen51.jpg" alt="Refugio Oriente proceso terminaciones exteriores trabajadores fachada">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Terminaciones Exteriores · En Proceso</span>
+          <p data-lang="es">Proceso de terminaciones exteriores del Refugio Oriente. Colaboradores en obra ejecutando los trabajos finales de fachada — aplicación de EIFS, instalación de guardapolvos y terminaciones de ventanas. La estructura de madera ya está montada y cerrada; lo que resta es el acabado exterior que da identidad al proyecto.</p>
+          <p data-lang="en">Exterior finishing stage of Refugio Oriente. On-site collaborators carrying out final facade works — EIFS application, sill installation and window trims. The timber structure is already assembled and enclosed; what remains is the exterior finish that gives the project its identity.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Terminaciones Exteriores · Proceso de Obra</span><span data-lang="en">Exterior Finishes · Construction Stage</span></div>
+          <div class="project-meta"><span data-lang="es">EIFS · Siding fibrocemento PVC · Colaboradores en obra</span><span data-lang="en">EIFS · PVC fibre cement siding · On-site collaborators</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Foto Real</span><span data-lang="en">Real Photo</span></span>
+      </div>
+    </div>
+
+    <!-- Render + Planta -->
+    <div class="project-card large">
+      <div class="project-image" style="aspect-ratio:16/10;">
+        <img src="imagen52.png" alt="Render Refugio Oriente áreas comunes juegos infantiles jardín fachada">
+        <div class="project-overlay">
+          <span class="overlay-tag">Render · Áreas Comunes · Fachada</span>
+          <p data-lang="es">Render del condominio Refugio Oriente mostrando las áreas comunes: juegos infantiles, jardines y fachadas con revestimiento EIFS blanco y gris oscuro con siding de fibrocemento PVC efecto madera café en segundo nivel. Diseño de líneas simples y espacios funcionales para la vida actual.</p>
+          <p data-lang="en">Render of Refugio Oriente condominium showing common areas: playground, gardens, and facades with white and dark grey EIFS cladding with wood-effect PVC fibre cement siding on the second level. Clean-line design and functional spaces for contemporary living.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Render · Áreas Comunes y Fachada</span><span data-lang="en">Render · Common Areas and Facade</span></div>
+          <div class="project-meta"><span data-lang="es">EIFS · Siding fibrocemento PVC café · Patagual Home</span><span data-lang="en">EIFS · Wood-effect PVC fibre cement siding · Patagual Home</span></div>
+        </div>
+        <span class="project-tag">Render</span>
+      </div>
+    </div>
+
+    <div class="project-card medium">
+      <div class="project-image" style="aspect-ratio:16/10;">
+        <img src="imagen54.png" alt="Planta Refugio Oriente 3 dormitorios 2 baños 71m2 primer y segundo piso">
+        <div class="project-overlay">
+          <span class="overlay-tag">Planta · 2 Pisos · 71 m² · 3D+2B</span>
+          <p data-lang="es">Planta de los dos niveles del Refugio Oriente: planta baja con living-comedor, cocina equipada y 1 dormitorio; planta alta con 2 dormitorios y 2 baños completos. 71 m² totales con opción de cocina abierta o cerrada. Madera de pino radiata calibrada 4 caras, graduada estructural.</p>
+          <p data-lang="en">Floor plans for both levels of Refugio Oriente: ground floor with living-dining, equipped kitchen and 1 bedroom; upper floor with 2 bedrooms and 2 full bathrooms. 71 m² total with open or closed kitchen option. 4-sided calibrated radiata pine timber, structural grade.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Planta · 3 Dorm + 2 Baños · 71 m²</span><span data-lang="en">Floor Plan · 3 Bed + 2 Bath · 71 m²</span></div>
+          <div class="project-meta"><span data-lang="es">2 pisos · Pino radiata · DS49/DS10 · Patagual Home</span><span data-lang="en">2 floors · Radiata pine · DS49/DS10 · Patagual Home</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Planta</span><span data-lang="en">Plan</span></span>
+      </div>
+    </div>
+
+    <!-- Modelo 3D EIFS + Entramado + Interior MDP -->
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
+        <img src="imagen53.png" alt="Modelo 3D Cadwork Refugio Oriente EIFS blanco antracita siding fibrocemento PVC café">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Modelo 3D · EIFS + Siding</span>
+          <p data-lang="es">Modelo 3D en Cadwork del Refugio Oriente mostrando dos módulos por nivel. Fachada con revestimiento EIFS en blanco (segundo nivel) y antracita (primer nivel), más siding de fibrocemento PVC café en terminaciones de ventanas. El modelo es la base para la lista de corte CNC y coordinación con especialidades.</p>
+          <p data-lang="en">Cadwork 3D model of Refugio Oriente showing two modules per level. Facade with EIFS cladding in white (second level) and anthracite (first level), plus wood-effect PVC fibre cement siding at window trims. The model is the basis for the CNC cut list and specialty coordination.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Modelo 3D · EIFS + Siding PVC Café</span><span data-lang="en">3D Model · EIFS + Wood-effect PVC Siding</span></div>
+          <div class="project-meta">Cadwork · EIFS · Siding fibrocemento PVC</div>
+        </div>
+        <span class="project-tag">Cadwork</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
+        <img src="imagen55.png" alt="Entramado madera Cadwork Refugio Oriente pino radiata estructural 2 módulos completo">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Entramado · Pino Radiata Estructural</span>
+          <p data-lang="es">Entramado estructural completo del Refugio Oriente modelado en Cadwork. Madera de pino radiata calibrada 4 caras, doble secado e impregnado, graduada estructural — resistencia sísmica, al fuego, anti-termitas y hongos integradas en el material. Dos módulos por nivel listos para lista de corte CNC.</p>
+          <p data-lang="en">Complete structural timber frame of Refugio Oriente modeled in Cadwork. 4-sided calibrated radiata pine, double dried and treated, structural grade — seismic resistance, fire resistance, anti-termite and fungal protection built into the material. Two modules per level ready for CNC cut list.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Entramado Estructural · Pino Radiata · 2 Módulos</span><span data-lang="en">Structural Frame · Radiata Pine · 2 Modules</span></div>
+          <div class="project-meta">Cadwork · CNC · <span data-lang="es">Pino Radiata Estructural</span><span data-lang="en">Structural Radiata Pine</span></div>
+        </div>
+        <span class="project-tag">Cadwork · CNC</span>
+      </div>
+    </div>
+
+    <div class="project-card third">
+      <div class="project-image" style="aspect-ratio:4/3;">
+        <img src="imagen56.png" alt="Cadwork Refugio Oriente interior MDP 12mm cielo piso Topnotch 18mm entramado listo OSB Volcanita EIFS">
+        <div class="project-overlay">
+          <span class="overlay-tag">Cadwork · Interior · MDP 12mm + Topnotch 18mm</span>
+          <p data-lang="es">Modelo Cadwork con caras interiores recubiertas: muros y cielo con placas MDP 12mm, piso con Topnotch 18mm. Entramado listo para modelar OSB 9.5mm, Volcanita 15mm y fachada EIFS. La coordinación de capas constructivas en el modelo evita errores de espesores y empalmes en obra.</p>
+          <p data-lang="en">Cadwork model with interior faces clad: walls and ceiling with MDP 12mm boards, floor with Topnotch 18mm. Frame ready to model OSB 9.5mm, Volcabond 15mm and EIFS facade. Coordinating construction layers in the model prevents thickness and splice errors on site.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Interior 3D · MDP 12mm + Topnotch 18mm</span><span data-lang="en">3D Interior · MDP 12mm + Topnotch 18mm</span></div>
+          <div class="project-meta">Cadwork · MDP · Topnotch · OSB · Volcanita</div>
+        </div>
+        <span class="project-tag">Cadwork</span>
+      </div>
+    </div>
+
+    <!-- Foto interior terminado - full width -->
+    <div class="project-card full">
+      <div class="project-image" style="aspect-ratio:21/9;">
+        <img src="imagen57.jpg" alt="Foto real interior Refugio Oriente terminado living blanco minimalista escalera negra madera">
+        <div class="project-overlay">
+          <span class="overlay-tag">Foto Real · Interior Terminado · Listo para Entrega</span>
+          <p data-lang="es">Interior real de una casa Refugio Oriente terminada y lista para entrega. Living minimalista con piso vinílico, escalera metálica negra con peldaños de madera, estantería flotante y luminaria de riel — exactamente como fue diseñado en el modelo Cadwork. La calidad de terminaciones es consecuencia directa del proceso BIM industrializado.</p>
+          <p data-lang="en">Real interior of a completed Refugio Oriente home ready for handover. Minimalist living room with vinyl flooring, black metal staircase with timber treads, floating shelving and track lighting — exactly as designed in the Cadwork model. Finish quality is a direct consequence of the industrialized BIM process.</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="project-name"><span data-lang="es">Interior Terminado · Listo para Entrega</span><span data-lang="en">Finished Interior · Ready for Handover</span></div>
+          <div class="project-meta"><span data-lang="es">Refugio Oriente · Foto real · Living + Escalera · Patagual Home</span><span data-lang="en">Refugio Oriente · Real photo · Living + Staircase · Patagual Home</span></div>
+        </div>
+        <span class="project-tag"><span data-lang="es">Foto Real</span><span data-lang="en">Real Photo</span></span>
+      </div>
+    </div>
+
+</div>
+</section>
+
+<div class="gold-line"></div>
+
+<section class="experience" id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <div class="section-title-block">
+      <div class="section-label"><span data-lang="es">Trayectoria · 10+ años de obra real</span><span data-lang="en">Career · 10+ years of real projects</span></div>
+      <h2 class="section-title"><span data-lang="es">De la Armada al BIM Manager</span><span data-lang="en">From the Navy to BIM Manager</span></h2>
+    </div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-period">Jul 2021 — Mar 2026</div>
+      <div>
+        <div class="exp-company">Patagual Home / Grupo Patagual</div>
+        <div class="exp-role"><span data-lang="es">Modelador &amp; Coordinador BIM</span><span data-lang="en">BIM Modeler &amp; Coordinator</span></div>
+        <div class="exp-desc"><span data-lang="es">Modelado 3D en Cadwork para construcción modular en madera. Coordinación BIM de especialidades MEP (sanitarias, eléctricas, corrientes débiles y ventilación pasiva) mediante IFC. Detección de interferencias, cubicaciones y supervisión de procesos constructivos.</span><span data-lang="en">3D modeling in Cadwork for modular timber construction. BIM coordination of MEP specialties (plumbing, electrical, low-voltage, passive ventilation) via IFC. Clash detection, quantity takeoffs, and construction process supervision.</span></div>
+      </div>
+      <span class="exp-badge">BIM · Cadwork</span>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">Jul 2020 — Jul 2021</div>
+      <div>
+        <div class="exp-company">Inmobiliaria 3L</div>
+        <div class="exp-role"><span data-lang="es">Jefe de Oficina Técnica / Encargado de Obra</span><span data-lang="en">Technical Office Manager / Site Manager</span></div>
+        <div class="exp-desc"><span data-lang="es">Obra Montepiedra: 120 departamentos DS19, 6.780 m². Planificación, control de avance, cubicaciones, estados de pago y gestión de subcontratos.</span><span data-lang="en">Montepiedra project: 120 DS19 apartments, 6,780 m². Planning, progress control, quantity takeoffs, payment certificates, and subcontract management.</span></div>
+      </div>
+      <span class="exp-badge">DS19 · OT</span>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">Feb 2020 — Jul 2020</div>
+      <div>
+        <div class="exp-company">Constructora Creotec / Grupo Patagual</div>
+        <div class="exp-role"><span data-lang="es">Profesional de Oficina Técnica</span><span data-lang="en">Technical Office Professional</span></div>
+        <div class="exp-desc"><span data-lang="es">Presupuestos y planificación de proyectos de vivienda modular DS19/DS49. Control financiero de obras hasta 132.450 UF.</span><span data-lang="en">Budgeting and planning for DS19/DS49 modular housing projects. Financial control of works up to 132,450 UF.</span></div>
+      </div>
+      <span class="exp-badge">132.450 UF</span>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">Abr 2018 — Feb 2020</div>
+      <div>
+        <div class="exp-company">Constructora 3L</div>
+        <div class="exp-role"><span data-lang="es">Jefe de Oficina Técnica</span><span data-lang="en">Technical Office Manager</span></div>
+        <div class="exp-desc"><span data-lang="es">Obra Horizonte de San Pedro: 130 viviendas DS19, 7.142 m², monto 120.348 UF. Control integral de obra, subcontratos y avance financiero.</span><span data-lang="en">Horizonte de San Pedro project: 130 DS19 homes, 7,142 m², 120,348 UF. Full site control, subcontracts, and financial progress management.</span></div>
+      </div>
+      <span class="exp-badge">120.348 UF</span>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">Mar 2017 — Abr 2018</div>
+      <div>
+        <div class="exp-company">Constructora Oscar Gebrie Sanhueza</div>
+        <div class="exp-role"><span data-lang="es">Oficina Técnica</span><span data-lang="en">Technical Office</span></div>
+        <div class="exp-desc"><span data-lang="es">Obras de infraestructura: Cárcel de Coronel (redes incendio y remodelación) y 5ª Compañía de Bomberos. Control de ejecución y gestión administrativa.</span><span data-lang="en">Infrastructure works: Coronel Prison (fire systems and renovation) and Fire Station No. 5. Execution control and administrative management.</span></div>
+      </div>
+      <span class="exp-badge">Infra</span>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<section class="education" id="education">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <div class="section-title-block">
+      <div class="section-label"><span data-lang="es">Formación · Barcelona · Concepción · Viña del Mar</span><span data-lang="en">Education · Barcelona · Concepción · Viña del Mar</span></div>
+      <h2 class="section-title"><span data-lang="es">Formación que Cruza Fronteras</span><span data-lang="en">Education That Crosses Borders</span></h2>
+    </div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-item">
+      <div class="edu-year">2021</div>
+      <div class="edu-degree"><span data-lang="es">Máster Internacional en BIM Management</span><span data-lang="en">International Master's in BIM Management</span></div>
+      <div class="edu-institution">Universitat de Barcelona (IL3) + Zigurat Global Institute</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2021</div>
+      <div class="edu-degree"><span data-lang="es">Certificación Autodesk Revit 2020</span><span data-lang="en">Autodesk Revit 2020 Certification</span></div>
+      <div class="edu-institution">Autodesk · Zigurat Global Institute</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2018</div>
+      <div class="edu-degree"><span data-lang="es">Ingeniería en Construcción · Licenciado</span><span data-lang="en">Construction Engineering · Bachelor's Degree</span></div>
+      <div class="edu-institution">Universidad Tecnológica de Chile INACAP</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2018</div>
+      <div class="edu-degree"><span data-lang="es">Plan de Aseguramiento de la Calidad PAC</span><span data-lang="en">Quality Assurance Plan PAC</span></div>
+      <div class="edu-institution">Universidad Austral de Chile · MOP ORD:1183</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2017</div>
+      <div class="edu-degree"><span data-lang="es">Construcción Civil</span><span data-lang="en">Civil Construction</span></div>
+      <div class="edu-institution">Instituto Profesional INACAP · Concepción</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2015</div>
+      <div class="edu-degree"><span data-lang="es">Técnico Superior en Edificación</span><span data-lang="en">Building Technology Technician</span></div>
+      <div class="edu-institution">CFT INACAP · Concepción - Talcahuano</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<section class="contact" id="contact">
+  <div class="contact-label"><span data-lang="es">Disponible ahora · Teletrabajo / Híbrido · Chile y mercado internacional</span><span data-lang="en">Available now · Remote / Hybrid · Chile and international market</span></div>
+  <h2 class="contact-heading">
+    <span data-lang="es">Tu próximo proyecto<br><em>merece el mejor modelo</em></span>
+    <span data-lang="en">Your next project<br><em>deserves the best model</em></span>
+  </h2>
+  <div class="contact-links">
+    <a href="tel:+56950065133" class="contact-link">
+      <span class="contact-link-label"><span data-lang="es">Teléfono</span><span data-lang="en">Phone</span></span>
+      <span class="contact-link-value">+56 9 5006 5133</span>
+    </a>
+    <a href="mailto:Raos2203@hotmail.com" class="contact-link">
+      <span class="contact-link-label">Email</span>
+      <span class="contact-link-value">Raos2203@hotmail.com</span>
+    </a>
+    <div class="contact-link">
+      <span class="contact-link-label"><span data-lang="es">Ubicación</span><span data-lang="en">Location</span></span>
+      <span class="contact-link-value">San Pedro de la Paz, Chile</span>
+    </div>
+    <div class="contact-link">
+      <span class="contact-link-label"><span data-lang="es">Modalidad</span><span data-lang="en">Work Mode</span></span>
+      <span class="contact-link-value"><span data-lang="es">Teletrabajo / Híbrido</span><span data-lang="en">Remote / Hybrid</span></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">
+    <span data-lang="es">© 2026 Rodrigo Alexander Oliva Suazo · Todos los derechos reservados</span>
+    <span data-lang="en">© 2026 Rodrigo Alexander Oliva Suazo · All rights reserved</span>
+  </div>
+  <div class="footer-role">Ingeniero Constructor · MBIM · BIM Coordinator</div>
+</footer>
+
+</body>
+</html>
